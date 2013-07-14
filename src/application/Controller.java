@@ -2,6 +2,7 @@ package application;
 
 import java.net.URL;
 import java.util.*;
+
 import exceptions.*;
 import javafx.event.*;
 import javafx.fxml.FXML;
@@ -95,7 +96,12 @@ public class Controller {
 		PinAcceptMethod();
 		StateOfAccountMethod();
 		CardOutMethod();
+		MoneyToWithMethod();
 	}
+
+	// public void information(Exception text){
+	// InfoTetx.setText(text.getLocalizedMessage());
+	// }
 
 	@FXML
 	void CardAcceptMethod() {
@@ -108,10 +114,11 @@ public class Controller {
 				try {
 					cm.insertCashCard(cd);
 				} catch (CardInsertedException e) {
+
 				} catch (InvalidCardException e) {
 				}
 				// TODO udelat errory a messages poradne
-				InfoTetx.setText("Card inserted");
+				// InfoTetx.setText("Card inserted");
 
 			}
 		});
@@ -166,6 +173,26 @@ public class Controller {
 
 			}
 		});
+	}
+
+	@FXML
+	void MoneyToWithMethod() {
+		MoneyToWith.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				try {
+					cm.withdraw(0);
+				} catch (PinNotCorectException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NotEnoughMoneyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+
 	}
 
 }

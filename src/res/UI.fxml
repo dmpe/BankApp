@@ -13,7 +13,7 @@
     <Button fx:id="StateOfAccount" layoutX="196.0" layoutY="122.0" mnemonicParsing="false" onAction="#StateOfAccountMethod" prefHeight="54.0" prefWidth="228.0" text="Account Statement" />
     <Button id="" fx:id="CardOut" layoutX="344.0" layoutY="316.0" mnemonicParsing="false" onAction="#CardOutMethod" prefHeight="70.0" prefWidth="183.0" text="Take your card out of the ATM" />
     <Button fx:id="CardAccept" layoutX="344.0" layoutY="75.0" mnemonicParsing="false" onAction="#CardAcceptMethod" prefHeight="34.0" prefWidth="222.0" text="Insert your card nummber" />
-    <Button id="" fx:id="MoneyToWith" layoutX="344.0" layoutY="224.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="183.0" text="Withdraw" />
+    <Button id="" fx:id="MoneyToWith" layoutX="344.0" layoutY="224.0" mnemonicParsing="false" onAction="#MoneyToWithMethod" prefHeight="70.0" prefWidth="183.0" text="Withdraw" />
     <TextField id="" fx:id="InsertAccNumber" layoutX="344.0" layoutY="32.0" prefHeight="34.0" prefWidth="222.0" promptText="Card insert" text="" />
     <TextField id="" fx:id="InsertPinNumber" layoutX="61.0" prefHeight="34.0" prefWidth="228.0" promptText="Pin insert" AnchorPane.bottomAnchor="334.0" />
     <TextField fx:id="InfoTetx" alignment="TOP_LEFT" editable="false" layoutX="14.0" layoutY="292.0" prefHeight="94.0" prefWidth="286.0" promptText="Info Text" />
