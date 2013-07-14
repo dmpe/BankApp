@@ -12,7 +12,7 @@ public class Main extends Application {
 		Parent root = FXMLLoader.load(getClass().getResource("/res/UI.fxml"));
 		Scene frame = new Scene(root);
 		primaryStage.isResizable();
-		primaryStage.setTitle("Bank Business");
+		primaryStage.setTitle("Bank Business created by @malcjohn");
 		primaryStage.setScene(frame);
 		primaryStage.centerOnScreen();
 		primaryStage.show();
