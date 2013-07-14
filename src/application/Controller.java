@@ -8,6 +8,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
+/*
+ * Controller class
+ * Model class is your UI.fxml
+ * This class was partly generated in SceneBuilder. Great feature
+ */
+
 public class Controller {
 
 	@FXML
@@ -51,6 +57,7 @@ public class Controller {
 
 	@FXML
 	private Button StateOfAccount;
+	
 	/*
 	 * Idea borrowed from James_D (Co-Director, Marshall University Genomics and
 	 * Bioinformatics Core Facility) here
