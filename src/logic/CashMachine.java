@@ -17,11 +17,11 @@ public class CashMachine<K> {
 	public CashMachine() {
 		index = 0;
 		state = State.READY;
-		
+
 		Account a1 = new Account(23456789, -100.0, 200, 1234);
 		Account a2 = new Account(34567890, -200.0, 300, 1234);
 		Account a3 = new Account(12345678, 0.0, 5000, 1234);
-		
+
 		// new predefined accounts
 		accounts = new LinkedList<Account>();
 		accounts.add(a1);
@@ -50,7 +50,8 @@ public class CashMachine<K> {
 			 * Iterable > alte for loop
 			 */
 			for (int i = 0; i < accounts.size(); i++) {
-				if ((accounts.get(i).getAccountNumber()) == (cashCard.getAccountNumber())) {
+				if ((accounts.get(i).getAccountNumber()) == (cashCard
+						.getAccountNumber())) {
 					/*
 					 * wenn account nummer und carten-account nummer entspricht
 					 * > speichere index, damit man weiter mit dem richtigen
@@ -158,12 +159,16 @@ public class CashMachine<K> {
 			throw new CardNotInsertedException();
 		}
 	}
+
+	/**
+	 * 
+	 * @return all the details from the account which is being used
+	 */
 	public String accountStatementMethod() {
-		return "\n" + "Account Statement: " + "\n"
-				+ "Account Nr.: " + accounts.get(index).getAccountNumber()
-				+ "\n" + "Bank Deposit: "
-				+ accounts.get(index).getBankDeposit() + "\n"
-				+ "Overdraft: " + accounts.get(index).getOverdraft();
+		return "Account Statement: " + "\n" + "Account Nr.: "
+				+ accounts.get(index).getAccountNumber() + "\n"
+				+ "Bank Deposit: " + accounts.get(index).getBankDeposit()
+				+ "\n" + "Overdraft: " + accounts.get(index).getOverdraft();
 	}
 
 	/**
