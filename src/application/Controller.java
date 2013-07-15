@@ -107,6 +107,7 @@ public class Controller {
 				CashCard cd = new CashCard(karteNummer);
 				try {
 					cm.insertCashCard(cd);
+					InfoTetx.setText("You have inserted a card in ATM");
 				} catch (CardInsertedException e) {
 					System.out.println(e.getMessage());
 				} catch (InvalidCardException e) {
@@ -125,6 +126,7 @@ public class Controller {
 				int pinNummer = Integer.parseInt(InsertPinNumber.getText());
 				try {
 					cm.pinEingeben(pinNummer);
+					InfoTetx.setText("You habe inserted a pin number in ATM");
 				} catch (PinNotCorectException e) {
 					System.out.println(e.getMessage());
 				} catch (CardNotInsertedException e) {
