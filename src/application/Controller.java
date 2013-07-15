@@ -1,14 +1,13 @@
 package application;
 
-import java.net.URL;
+import java.net.*;
 import java.util.*;
 
 import exceptions.*;
 import javafx.event.*;
-import javafx.fxml.FXML;
+import javafx.fxml.*;
 import javafx.scene.control.*;
 import logic.*;
-import logic.CashMachine.State; // nejak vyresit TODO
 
 /*
  * Controller class
@@ -72,7 +71,6 @@ public class Controller {
 	 * Object from CashMachine and CashCard
 	 */
 	CashMachine<Account> cm = new CashMachine<Account>();
-	State status;
 
 	@FXML
 	void initialize() {
@@ -99,10 +97,6 @@ public class Controller {
 		MoneyToWithMethod();
 	}
 
-	// public void information(Exception text){
-	// InfoTetx.setText(text.getLocalizedMessage());
-	// }
-
 	@FXML
 	void CardAcceptMethod() {
 		CardAccept.setOnAction(new EventHandler<ActionEvent>() {
@@ -114,15 +108,12 @@ public class Controller {
 				try {
 					cm.insertCashCard(cd);
 				} catch (CardInsertedException e) {
-
+					System.out.println(e.getMessage());
 				} catch (InvalidCardException e) {
+					System.out.println(e.getMessage());
 				}
-				// TODO udelat errory a messages poradne
-				// InfoTetx.setText("Card inserted");
-
 			}
 		});
-
 	}
 
 	@FXML
@@ -135,10 +126,11 @@ public class Controller {
 				try {
 					cm.pinEingeben(pinNummer);
 				} catch (PinNotCorectException e) {
-					// TODO udelat poradne
+					System.out.println(e.getMessage());
 				} catch (CardNotInsertedException e) {
-
+					System.out.println(e.getMessage());
 				} catch (InvalidCardException e) {
+					System.out.println(e.getMessage());
 				}
 			}
 		});
@@ -153,7 +145,7 @@ public class Controller {
 				try {
 					cm.accountStatement();
 				} catch (CardNotInsertedException e) {
-					// TODO udelat poradne
+					System.out.println(e.getMessage());
 				}
 			}
 		});
@@ -168,9 +160,8 @@ public class Controller {
 				try {
 					cm.ejectCashCard();
 				} catch (CardNotInsertedException e) {
-					// TODO Auto-generated catch block
+					System.out.println(e.getMessage());
 				}
-
 			}
 		});
 	}
@@ -184,15 +175,11 @@ public class Controller {
 				try {
 					cm.withdraw(0);
 				} catch (PinNotCorectException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println(e.getMessage());
 				} catch (NotEnoughMoneyException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println(e.getMessage());
 				}
 			}
 		});
-
 	}
-
 }

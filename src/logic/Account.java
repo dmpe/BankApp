@@ -9,7 +9,7 @@ public class Account {
 	private int pin;
 
 	/**
-	 * Dieser Konstruktor bittet uns schnelle Erstellung von accounts
+	 * This constructor allows a fast creation of accounts
 	 * 
 	 * @param accountNumber
 	 * @param overdraft
@@ -25,12 +25,12 @@ public class Account {
 		try {
 			setPin(pin);
 		} catch (WrongQuantityOfDigits e) {
-
+			System.out.println(e.getMessage());
 		}
 	}
 
 	/**
-	 * Speicherung der Kontonummer
+	 * Saves the account number
 	 * 
 	 * @param value
 	 *            accountNumber
@@ -48,7 +48,7 @@ public class Account {
 	}
 
 	/**
-	 * Dispokredit des Kontos
+	 * Credit you could withdraw. You set a limit here
 	 * 
 	 * @param value2
 	 *            overdraft
@@ -66,7 +66,7 @@ public class Account {
 	}
 
 	/**
-	 * die Hohe des Kontoguthabens
+	 * Your initial balance in the account
 	 * 
 	 * @param value3
 	 *            bankDeposit
@@ -93,7 +93,7 @@ public class Account {
 	 * @throws WrongQuantityOfDigits
 	 */
 	public void setPin(int value4) throws WrongQuantityOfDigits {
-		// wenn die lange der value4 gleich 4 ist
+		// if the lenght of value4 is 4
 		int length = String.valueOf(value4).length();
 		if (length == 4) {
 			this.pin = value4;

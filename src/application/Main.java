@@ -16,7 +16,6 @@ public class Main extends Application {
 		primaryStage.setScene(frame);
 		primaryStage.centerOnScreen();
 		primaryStage.show();
-
 	}
 
 	public static void main(String[] args) {

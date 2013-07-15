@@ -2,10 +2,9 @@ package logic;
 
 import java.util.*;
 import exceptions.*;
-import application.*;
 
 public class CashMachine<K> {
-	
+
 	public enum State {
 		READY, CARD_INSERTED, PIN_CORRECT, PIN_WRONG
 	}
@@ -13,16 +12,15 @@ public class CashMachine<K> {
 	List<Account> accounts;
 	private CashCard cashCard;
 	private State state;
-	private Controller control;
-	private int index; // Nr des Accounts in der Liste
+	private int index; // Number of account in the list
 
 	public CashMachine() {
 		index = 0;
 		state = State.READY;
 
-		// neu accounty erstellt.
+		// new predefined accounts
 		accounts = new LinkedList<Account>();
-		accounts.add(new Account(23456789, -100.0, 200, 1234)); 
+		accounts.add(new Account(23456789, -100.0, 200, 1234));
 		accounts.add(new Account(34567890, -200.0, 300, 1234));
 		accounts.add(new Account(12345678, 0.0, 5000, 1234));
 	}
@@ -69,7 +67,7 @@ public class CashMachine<K> {
 			break;
 		default:
 			throw new CardInsertedException();
-		} // switch Ende state
+		} // switch ends here
 	}
 
 	/**
@@ -146,7 +144,7 @@ public class CashMachine<K> {
 	 * @throws CardNotInsertedException
 	 */
 	public void accountStatement() throws CardNotInsertedException {
-		// prueft ob genug Geld ist
+		// tests if states are correctly set
 		if (state == State.CARD_INSERTED || state == State.PIN_CORRECT) {
 			System.out.println("\n" + "Account Statement: " + "\n"
 					+ "Account Nr.: " + accounts.get(index).getAccountNumber()
