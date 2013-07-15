@@ -33,10 +33,10 @@ public class Controller {
 	private RadioButton FreeMoney;
 
 	@FXML
-	private TextField AmmountMoneyToWid;
+	public TextArea InfoTetx;
 
 	@FXML
-	public TextField InfoTetx;
+	private TextField AmmountMoneyToWid;
 
 	@FXML
 	private TextField InsertAccNumber;
@@ -58,6 +58,9 @@ public class Controller {
 
 	@FXML
 	private Button StateOfAccount;
+
+	// @FXML
+	// private ScrollBar Scroll;
 
 	/*
 	 * Idea borrowed from James_D (Co-Director, Marshall University Genomics and
@@ -81,6 +84,8 @@ public class Controller {
 		assert ComboBox != null : "fx:id=\"ComboBox\" was not injected: check your FXML file 'UI.fxml'.";
 		assert FreeMoney != null : "fx:id=\"FreeMoney\" was not injected: check your FXML file 'UI.fxml'.";
 		assert InfoTetx != null : "fx:id=\"InfoTetx\" was not injected: check your FXML file 'UI.fxml'.";
+		// assert Scroll != null :
+		// "fx:id=\"Scroll\" was not injected: check your FXML file 'UI.fxml'.";
 		assert InsertAccNumber != null : "fx:id=\"InsertAccNumber\" was not injected: check your FXML file 'UI.fxml'.";
 		assert InsertPinNumber != null : "fx:id=\"InsertPinNumber\" was not injected: check your FXML file 'UI.fxml'.";
 		assert MoneyToWith != null : "fx:id=\"MoneyToWith\" was not injected: check your FXML file 'UI.fxml'.";
@@ -144,11 +149,7 @@ public class Controller {
 
 			@Override
 			public void handle(ActionEvent event) {
-				try {
-					cm.accountStatement();
-				} catch (CardNotInsertedException e) {
-					System.out.println(e.getMessage());
-				}
+				InfoTetx.setText(cm.accountStatementMethod());
 			}
 		});
 	}

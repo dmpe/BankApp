@@ -17,8 +17,7 @@ public class Account {
 	 * @param pin
 	 */
 
-	public Account(int accountNumber, double overdraft, double bankDeposit,
-			int pin) {
+	public Account(int accountNumber, double overdraft, double bankDeposit, int pin) {
 		this.accountNumber = accountNumber;
 		this.overdraft = overdraft;
 		this.bankDeposit = bankDeposit;
@@ -27,6 +26,10 @@ public class Account {
 		} catch (WrongQuantityOfDigits e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	public Account() {
+
 	}
 
 	/**

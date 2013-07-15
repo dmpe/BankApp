@@ -16,7 +16,6 @@
     <Button id="" fx:id="MoneyToWith" layoutX="344.0" layoutY="224.0" mnemonicParsing="false" onAction="#MoneyToWithMethod" prefHeight="70.0" prefWidth="183.0" text="Withdraw" />
     <TextField id="" fx:id="InsertAccNumber" layoutX="61.0" layoutY="34.0" prefHeight="34.0" prefWidth="228.0" promptText="Card insert" text="" />
     <TextField id="" fx:id="InsertPinNumber" layoutX="344.0" prefHeight="34.0" prefWidth="228.0" promptText="Pin insert" AnchorPane.bottomAnchor="332.0" />
-    <TextField fx:id="InfoTetx" alignment="TOP_LEFT" editable="false" layoutX="14.0" layoutY="292.0" prefHeight="94.0" prefWidth="286.0" promptText="Info Text" />
     <TextField id="" fx:id="AmmountMoneyToWid" layoutX="161.0" layoutY="248.0" prefHeight="34.0" prefWidth="128.0" promptText="Your ammount" />
     <RadioButton fx:id="ChoiceMoney" layoutX="14.0" layoutY="208.0" mnemonicParsing="false" text="Choice" />
     <RadioButton fx:id="FreeMoney" layoutX="100.0" layoutY="209.0" mnemonicParsing="false" text="Free" />
@@ -29,5 +28,6 @@
         </FXCollections>
       </items>
     </ComboBox>
+    <TextArea fx:id="InfoTetx" disable="false" editable="false" layoutX="14.0" layoutY="293.0" prefHeight="92.0" prefWidth="220.0" text="Start.....Here will be your text&#10;" wrapText="true" />
   </children>
 </AnchorPane>
