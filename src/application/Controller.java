@@ -4,8 +4,7 @@ import java.net.*;
 import java.util.*;
 
 import exceptions.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.*;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
@@ -67,12 +66,13 @@ public class Controller {
 	/*
 	 * Idea borrowed from James_D (Co-Director, Marshall University Genomics and
 	 * Bioinformatics Core Facility) here
-	 * https://forums.oracle.com/message/10746865
+	 * https://forums.oracle.com/message/10746865 
+	 * You can either use the List-item-object or ObservableList-item2-object
+	 * List<Integer> items = Arrays.asList(new Integer[] { 100, 200, 500, 700,
+	 *		1000, 1200 });
 	 */
-	List<Integer> items = Arrays.asList(new Integer[] { 100, 200, 500, 700,
-			1000, 1200 });
-	ObservableList<Integer> items2 = FXCollections.observableArrayList(10, 20,
-			200);
+	ObservableList<Integer> items2 = FXCollections.observableArrayList(100, 200, 500, 700,
+			1000, 1200);
 	/*
 	 * Object from CashMachine and CashCard
 	 */
@@ -96,7 +96,7 @@ public class Controller {
 		assert StateOfAccount != null : "fx:id=\"StateOfAccount\" was not injected: check your FXML file 'UI.fxml'.";
 
 		ComboBox.getItems().clear();
-		ComboBox.getItems().addAll(items2);
+		ComboBox.getItems().addAll(items2); // here can be changed to items
 
 		CardAcceptMethod();
 		PinAcceptMethod();
@@ -179,8 +179,7 @@ public class Controller {
 			@Override
 			public void handle(ActionEvent arg0) {
 				try {
-					int zahl = ComboBox.getValue();
-					cm.withdraw(zahl);
+					cm.withdraw(ComboBox.getValue());
 					StateOfAccountMethod();
 				} catch (PinNotCorectException e) {
 					System.out.println(e.getMessage());
