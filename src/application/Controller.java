@@ -66,16 +66,20 @@ public class Controller {
 	/*
 	 * Idea borrowed from James_D (Co-Director, Marshall University Genomics and
 	 * Bioinformatics Core Facility) here
-	 * https://forums.oracle.com/message/10746865 You can either use the
-	 * List-item-object or ObservableList-item2-object List<Integer> items =
+	 * https://forums.oracle.com/message/10746865 
+	 * 
+	 * You can either use the List-item-object or 
+	 * ObservableList-item2-object 
+	 * 
+	 * List<Integer> items =
 	 * Arrays.asList(new Integer[] { 100, 200, 500, 700, 1000, 1200 });
 	 */
 	ObservableList<Integer> items2 = FXCollections.observableArrayList(100,
 			200, 500, 700, 1000, 1200);
 	/*
-	 * Object from CashMachine and CashCard
+	 * Object from CashMachine
 	 */
-	CashMachine<Account> cm = new CashMachine<Account>();
+	CashMachine<Account> maschine = new CashMachine<Account>();
 
 	@FXML
 	void initialize() {
@@ -118,7 +122,7 @@ public class Controller {
 				CashCard cd = new CashCard(karteNummer);
 	
 				try {
-					cm.insertCashCard(cd);
+					maschine.insertCashCard(cd);
 					InfoTetx.setText("You have inserted a card in ATM");
 				} catch (CardInsertedException e) {
 					System.out.println(e.getMessage());
@@ -141,7 +145,7 @@ public class Controller {
 					AmmountMoneyToWid.setDisable(false);
 					ComboBox.setDisable(false);
 
-					cm.pinEingeben(pinNummer);
+					maschine.pinInsert(pinNummer);
 					InfoTetx.setText("You habe inserted a pin number in ATM");
 				} catch (PinNotCorectException e) {
 					System.out.println(e.getMessage());
@@ -160,7 +164,7 @@ public class Controller {
 
 			@Override
 			public void handle(ActionEvent event) {
-				InfoTetx.setText(cm.accountStatementMethod());
+				InfoTetx.setText(maschine.accountStatementMethod());
 			}
 		});
 	}
@@ -172,7 +176,7 @@ public class Controller {
 			@Override
 			public void handle(ActionEvent event) {
 				try {
-					cm.ejectCashCard();
+					maschine.ejectCashCard();
 				} catch (CardNotInsertedException e) {
 					System.out.println(e.getMessage());
 				}
@@ -189,13 +193,12 @@ public class Controller {
 				try {
 					
 					if (ChoiceMoney.isSelected()) {
-						cm.withdraw(ComboBox.getValue());
-						InfoTetx.setText(cm.accountStatementMethod());
+						maschine.withdraw(ComboBox.getValue());
+						InfoTetx.setText(maschine.accountStatementMethod());
 					} else if (FreeMoney.isSelected()) {
-						int zahl2 = Integer.parseInt(AmmountMoneyToWid
-								.getText());
-						cm.withdraw(zahl2);
-						InfoTetx.setText(cm.accountStatementMethod());
+						int zahl2 = Integer.parseInt(AmmountMoneyToWid.getText());
+						maschine.withdraw(zahl2);
+						InfoTetx.setText(maschine.accountStatementMethod());
 					} else {
 						InfoTetx.setText("mistake");
 					}

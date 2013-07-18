@@ -88,7 +88,7 @@ public class CashMachine<K> {
 	 * @throws CardNotInsertedException
 	 * @throws InvalidCardException
 	 */
-	public void pinEingeben(int pinX) throws PinNotCorectException,
+	public void pinInsert(int pinX) throws PinNotCorectException,
 			CardNotInsertedException, InvalidCardException {
 		switch (state) {
 		case CARD_INSERTED:
