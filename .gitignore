@@ -1,6 +1,4 @@
 *.class
-/bin
-*.bin
 *bin
 
 # Package Files #

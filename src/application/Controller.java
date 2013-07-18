@@ -59,19 +59,19 @@ public class Controller {
 
 	@FXML
 	private Button StateOfAccount;
-	
+
 	// @FXML
 	// private ScrollBar Scroll;
-	
+
 	/*
 	 * http://docs.oracle.com/javafx/2/api/javafx/scene/control/RadioButton.html
-	 * Only one RadioButton can be selected when placed in a ToggleGroup. A
-	 * RadioButton that is not in a ToggleGroup can be selected and unselected.
+	 * "Only one RadioButton can be selected when placed in a ToggleGroup.... A
+	 * RadioButton that is not in a ToggleGroup can be selected and unselected."
 	 */
 	ToggleGroup group = new ToggleGroup();
 
 	/*
-	 * Idea borrowed from James_D (Co-Director, Marshall University Genomics and
+	 * I have borrowed this idea from James_D (Co-Director, Marshall University Genomics and
 	 * Bioinformatics Core Facility) here
 	 * https://forums.oracle.com/message/10746865
 	 * 
@@ -82,6 +82,7 @@ public class Controller {
 	 */
 	ObservableList<Integer> items2 = FXCollections.observableArrayList(100,
 			200, 500, 700, 1000, 1200);
+	
 	/*
 	 * Object from CashMachine
 	 */
@@ -103,9 +104,14 @@ public class Controller {
 		assert MoneyToWith != null : "fx:id=\"MoneyToWith\" was not injected: check your FXML file 'UI.fxml'.";
 		assert PinAccept != null : "fx:id=\"PinAccept\" was not injected: check your FXML file 'UI.fxml'.";
 		assert StateOfAccount != null : "fx:id=\"StateOfAccount\" was not injected: check your FXML file 'UI.fxml'.";
-
-		ComboBox.getItems().clear();
-		ComboBox.getItems().addAll(items2); // here can be changed to items
+		
+		/*
+		 * This is another possibility how to use comboboxes
+		 * 
+		 * ComboBox.getItems().clear(); 
+		 * ComboBox.getItems().addAll(items2); // here can be changed to items
+		 */
+		ComboBox.setItems(items2);
 
 		ComboBox.setDisable(true);
 		AmmountMoneyToWid.setDisable(true);
