@@ -113,8 +113,10 @@ public class Controller {
 
 			@Override
 			public void handle(ActionEvent event) {
+				
 				int karteNummer = Integer.parseInt(InsertAccNumber.getText());
 				CashCard cd = new CashCard(karteNummer);
+	
 				try {
 					cm.insertCashCard(cd);
 					InfoTetx.setText("You have inserted a card in ATM");
@@ -135,10 +137,10 @@ public class Controller {
 			public void handle(ActionEvent event) {
 				int pinNummer = Integer.parseInt(InsertPinNumber.getText());
 				try {
-					
+
 					AmmountMoneyToWid.setDisable(false);
 					ComboBox.setDisable(false);
-					
+
 					cm.pinEingeben(pinNummer);
 					InfoTetx.setText("You habe inserted a pin number in ATM");
 				} catch (PinNotCorectException e) {
@@ -185,6 +187,7 @@ public class Controller {
 			@Override
 			public void handle(ActionEvent arg0) {
 				try {
+					
 					if (ChoiceMoney.isSelected()) {
 						cm.withdraw(ComboBox.getValue());
 						InfoTetx.setText(cm.accountStatementMethod());
@@ -196,12 +199,13 @@ public class Controller {
 					} else {
 						InfoTetx.setText("mistake");
 					}
+				
 				} catch (PinNotCorectException e) {
 					System.out.println(e.getMessage());
 				} catch (NotEnoughMoneyException e) {
 					System.out.println(e.getMessage());
 				}
-			}
+			} // here end of the small method
 		});
-	}
+	}// here the end of the method
 }
