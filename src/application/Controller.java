@@ -4,6 +4,8 @@ import java.net.*;
 import java.util.*;
 
 import exceptions.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
@@ -69,7 +71,8 @@ public class Controller {
 	 */
 	List<Integer> items = Arrays.asList(new Integer[] { 100, 200, 500, 700,
 			1000, 1200 });
-
+	ObservableList<Integer> items2 = FXCollections.observableArrayList(10, 20,
+			200);
 	/*
 	 * Object from CashMachine and CashCard
 	 */
@@ -93,7 +96,7 @@ public class Controller {
 		assert StateOfAccount != null : "fx:id=\"StateOfAccount\" was not injected: check your FXML file 'UI.fxml'.";
 
 		ComboBox.getItems().clear();
-		ComboBox.getItems().addAll(items);
+		ComboBox.getItems().addAll(items2);
 
 		CardAcceptMethod();
 		PinAcceptMethod();
@@ -176,7 +179,9 @@ public class Controller {
 			@Override
 			public void handle(ActionEvent arg0) {
 				try {
-					cm.withdraw(0);
+					int zahl = ComboBox.getValue();
+					cm.withdraw(zahl);
+					StateOfAccountMethod();
 				} catch (PinNotCorectException e) {
 					System.out.println(e.getMessage());
 				} catch (NotEnoughMoneyException e) {

@@ -26,3 +26,6 @@ Look more on my blog where I have wrote about it.
 
 Here (TBA)
 
+**Features in the future** 
+
+1. [] Allow to add accounts in the cashmaschine dynamically, through another fxml model.
