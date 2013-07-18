@@ -59,20 +59,26 @@ public class Controller {
 
 	@FXML
 	private Button StateOfAccount;
-
+	
 	// @FXML
 	// private ScrollBar Scroll;
+	
+	/*
+	 * http://docs.oracle.com/javafx/2/api/javafx/scene/control/RadioButton.html
+	 * Only one RadioButton can be selected when placed in a ToggleGroup. A
+	 * RadioButton that is not in a ToggleGroup can be selected and unselected.
+	 */
+	ToggleGroup group = new ToggleGroup();
 
 	/*
 	 * Idea borrowed from James_D (Co-Director, Marshall University Genomics and
 	 * Bioinformatics Core Facility) here
-	 * https://forums.oracle.com/message/10746865 
+	 * https://forums.oracle.com/message/10746865
 	 * 
-	 * You can either use the List-item-object or 
-	 * ObservableList-item2-object 
+	 * You can either use the List-item-object or ObservableList-item2-object
 	 * 
-	 * List<Integer> items =
-	 * Arrays.asList(new Integer[] { 100, 200, 500, 700, 1000, 1200 });
+	 * List<Integer> items = Arrays.asList(new Integer[] { 100, 200, 500, 700,
+	 * 1000, 1200 });
 	 */
 	ObservableList<Integer> items2 = FXCollections.observableArrayList(100,
 			200, 500, 700, 1000, 1200);
@@ -104,6 +110,9 @@ public class Controller {
 		ComboBox.setDisable(true);
 		AmmountMoneyToWid.setDisable(true);
 
+		FreeMoney.setToggleGroup(group);
+		ChoiceMoney.setToggleGroup(group);
+
 		CardAcceptMethod();
 		PinAcceptMethod();
 		StateOfAccountMethod();
@@ -117,10 +126,10 @@ public class Controller {
 
 			@Override
 			public void handle(ActionEvent event) {
-				
+
 				int karteNummer = Integer.parseInt(InsertAccNumber.getText());
 				CashCard cd = new CashCard(karteNummer);
-	
+
 				try {
 					maschine.insertCashCard(cd);
 					InfoTetx.setText("You have inserted a card in ATM");
@@ -141,10 +150,6 @@ public class Controller {
 			public void handle(ActionEvent event) {
 				int pinNummer = Integer.parseInt(InsertPinNumber.getText());
 				try {
-
-					AmmountMoneyToWid.setDisable(false);
-					ComboBox.setDisable(false);
-
 					maschine.pinInsert(pinNummer);
 					InfoTetx.setText("You habe inserted a pin number in ATM");
 				} catch (PinNotCorectException e) {
@@ -165,6 +170,10 @@ public class Controller {
 			@Override
 			public void handle(ActionEvent event) {
 				InfoTetx.setText(maschine.accountStatementMethod());
+
+				AmmountMoneyToWid.setDisable(false);
+				ComboBox.setDisable(false);
+
 			}
 		});
 	}
@@ -191,18 +200,20 @@ public class Controller {
 			@Override
 			public void handle(ActionEvent arg0) {
 				try {
-					
+
 					if (ChoiceMoney.isSelected()) {
 						maschine.withdraw(ComboBox.getValue());
 						InfoTetx.setText(maschine.accountStatementMethod());
+
 					} else if (FreeMoney.isSelected()) {
-						int zahl2 = Integer.parseInt(AmmountMoneyToWid.getText());
+						double zahl2 = Double.parseDouble(AmmountMoneyToWid
+								.getText());
 						maschine.withdraw(zahl2);
 						InfoTetx.setText(maschine.accountStatementMethod());
 					} else {
 						InfoTetx.setText("mistake");
 					}
-				
+
 				} catch (PinNotCorectException e) {
 					System.out.println(e.getMessage());
 				} catch (NotEnoughMoneyException e) {
