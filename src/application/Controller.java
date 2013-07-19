@@ -2,13 +2,13 @@ package application;
 
 import java.net.*;
 import java.util.*;
-
 import exceptions.*;
+import logic.*;
 import javafx.collections.*;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
-import logic.*;
+import javafx.scene.input.*;
 
 /*
  * Controller class
@@ -71,8 +71,8 @@ public class Controller {
 	ToggleGroup group = new ToggleGroup();
 
 	/*
-	 * I have borrowed this idea from James_D (Co-Director, Marshall University Genomics and
-	 * Bioinformatics Core Facility) here
+	 * I have borrowed this idea from James_D (Co-Director, Marshall University
+	 * Genomics and Bioinformatics Core Facility) here
 	 * https://forums.oracle.com/message/10746865
 	 * 
 	 * You can either use the List-item-object or ObservableList-item2-object
@@ -82,11 +82,12 @@ public class Controller {
 	 */
 	ObservableList<Integer> items2 = FXCollections.observableArrayList(100,
 			200, 500, 700, 1000, 1200);
-	
+
 	/*
-	 * Object from CashMachine
+	 * Object from CashMachine & CashCard
 	 */
 	CashMachine<Account> maschine = new CashMachine<Account>();
+	CashCard cashCard = new CashCard();
 
 	@FXML
 	void initialize() {
@@ -97,19 +98,17 @@ public class Controller {
 		assert ComboBox != null : "fx:id=\"ComboBox\" was not injected: check your FXML file 'UI.fxml'.";
 		assert FreeMoney != null : "fx:id=\"FreeMoney\" was not injected: check your FXML file 'UI.fxml'.";
 		assert InfoTetx != null : "fx:id=\"InfoTetx\" was not injected: check your FXML file 'UI.fxml'.";
-		// assert Scroll != null :
-		// "fx:id=\"Scroll\" was not injected: check your FXML file 'UI.fxml'.";
 		assert InsertAccNumber != null : "fx:id=\"InsertAccNumber\" was not injected: check your FXML file 'UI.fxml'.";
 		assert InsertPinNumber != null : "fx:id=\"InsertPinNumber\" was not injected: check your FXML file 'UI.fxml'.";
 		assert MoneyToWith != null : "fx:id=\"MoneyToWith\" was not injected: check your FXML file 'UI.fxml'.";
 		assert PinAccept != null : "fx:id=\"PinAccept\" was not injected: check your FXML file 'UI.fxml'.";
 		assert StateOfAccount != null : "fx:id=\"StateOfAccount\" was not injected: check your FXML file 'UI.fxml'.";
-		
+
 		/*
 		 * This is another possibility how to use comboboxes
 		 * 
-		 * ComboBox.getItems().clear(); 
-		 * ComboBox.getItems().addAll(items2); // here can be changed to items
+		 * ComboBox.getItems().clear(); ComboBox.getItems().addAll(items2); //
+		 * here can be changed to items
 		 */
 		ComboBox.setItems(items2);
 
@@ -121,9 +120,12 @@ public class Controller {
 
 		CardAcceptMethod();
 		PinAcceptMethod();
+		CardKeyPressedMethod();
+		PinKeyPressedMethod();
 		StateOfAccountMethod();
 		CardOutMethod();
 		MoneyToWithMethod();
+
 	}
 
 	@FXML
@@ -132,20 +134,78 @@ public class Controller {
 
 			@Override
 			public void handle(ActionEvent event) {
-
-				int karteNummer = Integer.parseInt(InsertAccNumber.getText());
-				CashCard cd = new CashCard(karteNummer);
-
 				try {
-					maschine.insertCashCard(cd);
+					int karteNummer = Integer.parseInt(InsertAccNumber
+							.getText());
+					cashCard.setAccountNumber(karteNummer);
+					maschine.insertCashCard(cashCard);
 					InfoTetx.setText("You have inserted a card in ATM");
 				} catch (CardInsertedException e) {
 					System.out.println(e.getMessage());
 				} catch (InvalidCardException e) {
 					System.out.println(e.getMessage());
 				}
+				InsertAccNumber.setEditable(false);
 			}
 		});
+	}
+
+	/**
+	 * Idea borrowed from
+	 * 
+	 * @author shakir.gusaroff {@link} https://forums.oracle.com/thread/2401060
+	 */
+	@FXML
+	void CardKeyPressedMethod() {
+		InsertAccNumber.addEventFilter(KeyEvent.KEY_PRESSED,
+				new EventHandler<KeyEvent>() {
+
+					@Override
+					public void handle(KeyEvent event) {
+						if (event.getCode() == KeyCode.ENTER) {
+							try {
+								int karteNummer = Integer
+										.parseInt(InsertAccNumber.getText());
+								cashCard.setAccountNumber(karteNummer);
+								maschine.insertCashCard(cashCard);
+								InfoTetx.setText("You have inserted a card in ATM");
+							} catch (CardInsertedException e) {
+								System.out.println(e.getMessage());
+							} catch (InvalidCardException e) {
+								System.out.println(e.getMessage());
+							}
+							InsertAccNumber.setEditable(false);
+						}
+						event.consume();
+					}
+				});
+	}
+
+	@FXML
+	void PinKeyPressedMethod() {
+		InsertPinNumber.addEventFilter(KeyEvent.KEY_PRESSED,
+				new EventHandler<KeyEvent>() {
+
+					@Override
+					public void handle(KeyEvent event) {
+						if (event.getCode() == KeyCode.ENTER) {
+							try {
+								int pinNummer = Integer
+										.parseInt(InsertPinNumber.getText());
+								maschine.pinInsert(pinNummer);
+								InfoTetx.setText("You habe inserted a pin number in ATM");
+							} catch (PinNotCorectException e) {
+								System.out.println(e.getMessage());
+							} catch (CardNotInsertedException e) {
+								System.out.println(e.getMessage());
+							} catch (InvalidCardException e) {
+								System.out.println(e.getMessage());
+							}
+							InsertPinNumber.setEditable(false);
+						}
+						event.consume();
+					}
+				});
 	}
 
 	@FXML
@@ -154,8 +214,8 @@ public class Controller {
 
 			@Override
 			public void handle(ActionEvent event) {
-				int pinNummer = Integer.parseInt(InsertPinNumber.getText());
 				try {
+					int pinNummer = Integer.parseInt(InsertPinNumber.getText());
 					maschine.pinInsert(pinNummer);
 					InfoTetx.setText("You habe inserted a pin number in ATM");
 				} catch (PinNotCorectException e) {
@@ -165,6 +225,8 @@ public class Controller {
 				} catch (InvalidCardException e) {
 					System.out.println(e.getMessage());
 				}
+				InsertPinNumber.setEditable(false);
+				InfoTetx.setText("take your card out, then you can change the number again");
 			}
 		});
 	}
@@ -176,14 +238,17 @@ public class Controller {
 			@Override
 			public void handle(ActionEvent event) {
 				InfoTetx.setText(maschine.accountStatementMethod());
-
 				AmmountMoneyToWid.setDisable(false);
 				ComboBox.setDisable(false);
-
 			}
 		});
 	}
 
+	/**
+	 * for the right docs see JavaFX8 docs:
+	 * xxx/api/javafx/scene/control/TextInputControl.html#deleteText(int,%20int)
+	 * and see this bug {@link} https://javafx-jira.kenai.com/browse/RT-31802
+	 */
 	@FXML
 	void CardOutMethod() {
 		CardOut.setOnAction(new EventHandler<ActionEvent>() {
@@ -192,6 +257,12 @@ public class Controller {
 			public void handle(ActionEvent event) {
 				try {
 					maschine.ejectCashCard();
+					int zahl = InsertAccNumber.getLength();
+					int zahl2 = InsertPinNumber.getLength();
+					InsertAccNumber.deleteText(0, zahl);
+					InsertAccNumber.setEditable(true);
+					InsertPinNumber.deleteText(0, zahl2);
+					InsertPinNumber.setEditable(true);
 				} catch (CardNotInsertedException e) {
 					System.out.println(e.getMessage());
 				}
@@ -206,7 +277,6 @@ public class Controller {
 			@Override
 			public void handle(ActionEvent arg0) {
 				try {
-
 					if (ChoiceMoney.isSelected()) {
 						maschine.withdraw(ComboBox.getValue());
 						InfoTetx.setText(maschine.accountStatementMethod());
@@ -219,7 +289,6 @@ public class Controller {
 					} else {
 						InfoTetx.setText("mistake");
 					}
-
 				} catch (PinNotCorectException e) {
 					System.out.println(e.getMessage());
 				} catch (NotEnoughMoneyException e) {
