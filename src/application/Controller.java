@@ -259,10 +259,12 @@ public class Controller {
 					maschine.ejectCashCard();
 					int zahl = InsertAccNumber.getLength();
 					int zahl2 = InsertPinNumber.getLength();
+					int zahl3 = InfoTetx.getLength();
 					InsertAccNumber.deleteText(0, zahl);
 					InsertAccNumber.setEditable(true);
 					InsertPinNumber.deleteText(0, zahl2);
 					InsertPinNumber.setEditable(true);
+					InfoTetx.deleteText(0, zahl3);
 				} catch (CardNotInsertedException e) {
 					System.out.println(e.getMessage());
 				}

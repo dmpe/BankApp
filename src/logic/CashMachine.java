@@ -18,9 +18,9 @@ public class CashMachine<K> {
 		index = 0;
 		state = State.READY;
 
-		Account a1 = new Account(23456789, -100.0, 200, 1234);
-		Account a2 = new Account(34567890, -200.0, 300, 1234);
-		Account a3 = new Account(12345678, 0.0, 5000, 1234);
+		Account a1 = new Account(23456789, -100.0, 2000, 1234);
+		Account a2 = new Account(34567890, -200.0, 3000, 1234);
+		Account a3 = new Account(12345678, 0.0, 50000, 1234);
 
 		// new predefined accounts
 		accounts = new LinkedList<Account>();
