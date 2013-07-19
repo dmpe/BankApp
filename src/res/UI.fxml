@@ -28,6 +28,6 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <TextArea fx:id="InfoTetx" disable="false" editable="false" layoutX="14.0" layoutY="293.0" prefHeight="92.0" prefWidth="220.0" text="Start.....Here will be your text&#10;" wrapText="true" />
+    <TextArea fx:id="InfoTetx" disable="false" editable="false" layoutX="14.0" layoutY="293.0" prefHeight="92.0" prefWidth="220.0" text="Account | Cash | Pin&#10;23456789, 2000, 1234&#10;34567890, 3000, 1234&#10;12345678, 50000, 1234&#10;" wrapText="true" />
   </children>
 </AnchorPane>

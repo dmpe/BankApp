@@ -60,9 +60,6 @@ public class Controller {
 	@FXML
 	private Button StateOfAccount;
 
-	// @FXML
-	// private ScrollBar Scroll;
-
 	/*
 	 * http://docs.oracle.com/javafx/2/api/javafx/scene/control/RadioButton.html
 	 * "Only one RadioButton can be selected when placed in a ToggleGroup.... A
