@@ -2,6 +2,7 @@ package application;
 
 import java.net.*;
 import java.util.*;
+
 import exceptions.*;
 import logic.*;
 import javafx.collections.*;
@@ -16,7 +17,7 @@ import javafx.scene.input.*;
  * This class was generated in SceneBuilder. Great feature
  */
 
-public class Controller {
+public class MenuController {
 
 	@FXML
 	private ResourceBundle resources;
@@ -124,6 +125,19 @@ public class Controller {
 		MoneyToWithMethod();
 
 	}
+	
+	/*
+	 * nonEditBox.addEventHandler(KeyEvent.ANY, new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent keyEvent) {
+				if (keyEvent.getCode().equals(KeyCode.BACK_SPACE)
+						|| keyEvent.getCode().equals(KeyCode.DELETE)) {
+					System.out.println("VBox is receiving key event !");
+				}
+			}
+		});
+	 */
 
 	@FXML
 	void CardAcceptMethod() {
@@ -136,13 +150,14 @@ public class Controller {
 							.getText());
 					cashCard.setAccountNumber(karteNummer);
 					maschine.insertCashCard(cashCard);
-					InfoTetx.setText("You have inserted a card in ATM");
+					InfoTetx.appendText("\n You have inserted a card in ATM");
 				} catch (CardInsertedException e) {
 					System.out.println(e.getMessage());
 				} catch (InvalidCardException e) {
 					System.out.println(e.getMessage());
 				}
 				InsertAccNumber.setEditable(false);
+				event.consume();
 			}
 		});
 	}
@@ -165,7 +180,7 @@ public class Controller {
 										.parseInt(InsertAccNumber.getText());
 								cashCard.setAccountNumber(karteNummer);
 								maschine.insertCashCard(cashCard);
-								InfoTetx.setText("You have inserted a card in ATM");
+								InfoTetx.appendText("\n You have inserted a card in ATM");
 							} catch (CardInsertedException e) {
 								System.out.println(e.getMessage());
 							} catch (InvalidCardException e) {
@@ -190,7 +205,7 @@ public class Controller {
 								int pinNummer = Integer
 										.parseInt(InsertPinNumber.getText());
 								maschine.pinInsert(pinNummer);
-								InfoTetx.setText("You habe inserted a pin number in ATM");
+								InfoTetx.appendText("\n You habe inserted a pin in ATM");
 							} catch (PinNotCorectException e) {
 								System.out.println(e.getMessage());
 							} catch (CardNotInsertedException e) {
@@ -214,7 +229,7 @@ public class Controller {
 				try {
 					int pinNummer = Integer.parseInt(InsertPinNumber.getText());
 					maschine.pinInsert(pinNummer);
-					InfoTetx.setText("You habe inserted a pin number in ATM");
+					InfoTetx.appendText("\n You habe inserted a pin number in ATM");
 				} catch (PinNotCorectException e) {
 					System.out.println(e.getMessage());
 				} catch (CardNotInsertedException e) {
@@ -223,7 +238,8 @@ public class Controller {
 					System.out.println(e.getMessage());
 				}
 				InsertPinNumber.setEditable(false);
-				InfoTetx.setText("take your card out, then you can change the number again");
+				InfoTetx.appendText("\n take your card out, then you can change the number again");
+				event.consume();
 			}
 		});
 	}
@@ -234,9 +250,10 @@ public class Controller {
 
 			@Override
 			public void handle(ActionEvent event) {
-				InfoTetx.setText(maschine.accountStatementMethod());
+				InfoTetx.appendText("\n" + maschine.accountStatementMethod());
 				AmmountMoneyToWid.setDisable(false);
 				ComboBox.setDisable(false);
+				event.consume();
 			}
 		});
 	}
@@ -265,6 +282,7 @@ public class Controller {
 				} catch (CardNotInsertedException e) {
 					System.out.println(e.getMessage());
 				}
+				event.consume();
 			}
 		});
 	}
@@ -274,25 +292,30 @@ public class Controller {
 		MoneyToWith.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
-			public void handle(ActionEvent arg0) {
+			public void handle(ActionEvent event) {
 				try {
 					if (ChoiceMoney.isSelected()) {
 						maschine.withdraw(ComboBox.getValue());
-						InfoTetx.setText(maschine.accountStatementMethod());
+						InfoTetx.appendText("--New--");
+						InfoTetx.appendText("\n"
+								+ maschine.accountStatementMethod());
 
 					} else if (FreeMoney.isSelected()) {
 						double zahl2 = Double.parseDouble(AmmountMoneyToWid
 								.getText());
 						maschine.withdraw(zahl2);
-						InfoTetx.setText(maschine.accountStatementMethod());
+						InfoTetx.appendText("--New--");
+						InfoTetx.appendText("\n"
+								+ maschine.accountStatementMethod());
 					} else {
-						InfoTetx.setText("mistake");
+						InfoTetx.appendText("\n You must choose the ammount to withdraw");
 					}
 				} catch (PinNotCorectException e) {
 					System.out.println(e.getMessage());
 				} catch (NotEnoughMoneyException e) {
 					System.out.println(e.getMessage());
 				}
+				event.consume();
 			} // here end of the small method
 		});
 	}// here the end of the method

@@ -28,5 +28,5 @@ Here (TBA)
 
 **Features in the future** 
 
-1. [] Allow to add accounts in the cashmaschine dynamically, through another fxml model.
-2. [] TextField should be done with Scrollbar
+1. [] Allow to add accounts in the cashmaschine dynamically, through another fxml model. Nice to create some menu 
+2. [x] TextField should be done with Scrollbar
