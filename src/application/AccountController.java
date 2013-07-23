@@ -31,6 +31,9 @@ public class AccountController {
 	private Button ButtonPin;
 
 	@FXML
+	private Button printButton;
+
+	@FXML
 	private TextField AccountNumberField;
 
 	@FXML
@@ -49,6 +52,7 @@ public class AccountController {
 	 * Object Account for inserting all the stuff there
 	 */
 	Account ac = new Account();
+	CashMachine<Account> cm = new CashMachine<Account>();
 
 	@FXML
 	void initialize() {
@@ -61,6 +65,7 @@ public class AccountController {
 		assert OverdraftField != null : "fx:id=\"OverdraftField\" was not injected: check your FXML file 'Account.fxml'.";
 		assert PinField != null : "fx:id=\"PinField\" was not injected: check your FXML file 'Account.fxml'.";
 		assert TextArea != null : "fx:id=\"TextArea\" was not injected: check your FXML file 'Account.fxml'.";
+		assert printButton != null : "fx:id=\"printButton\" was not injected: check your FXML file 'account.fxml'.";
 
 		AccountNumberMethod();
 		ButtonAccountNumberMethod();
@@ -217,4 +222,17 @@ public class AccountController {
 				});
 	}
 
+	@FXML
+	void printAllAccounts() {
+		printButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				Iterator<Account> s = cm.iterator();
+				while (s.hasNext()) {
+					TextArea.appendText("\n" + s.next());
+				}
+			}
+		});
+	}
 }

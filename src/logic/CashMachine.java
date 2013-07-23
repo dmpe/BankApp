@@ -1,9 +1,10 @@
 package logic;
 
 import java.util.*;
+
 import exceptions.*;
 
-public class CashMachine<K> {
+public class CashMachine<K> implements Iterable<Account> {
 
 	public enum State {
 		READY, CARD_INSERTED, PIN_CORRECT, PIN_WRONG
@@ -192,5 +193,13 @@ public class CashMachine<K> {
 		} else {
 			throw new CardNotInsertedException();
 		}
+	}
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Iterable#iterator()
+	 */
+	@Override
+	public Iterator<Account> iterator() {
+		return accounts.iterator();
 	}
 }

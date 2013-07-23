@@ -3,12 +3,16 @@ package application;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+
 import exceptions.*;
 import javafx.collections.*;
 import javafx.event.*;
 import javafx.fxml.*;
+import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
 import logic.*;
 import jfxtras.labs.dialogs.*;
 import jfxtras.labs.dialogs.MonologFX.*;
@@ -72,6 +76,11 @@ public class Controller {
 	@FXML
 	private TextField accountField;
 
+	@FXML
+	private AnchorPane accon;
+
+	@FXML
+	private AccountController dialogController;
 	/*
 	 * http://docs.oracle.com/javafx/2/api/javafx/scene/control/RadioButton.html
 	 * "Only one RadioButton can be selected when placed in a ToggleGroup.... A
@@ -300,7 +309,6 @@ public class Controller {
 						infoText.appendText("\n--New--");
 						infoText.appendText("\n"
 								+ maschine.accountStatementMethod());
-
 					} else if (free.isSelected()) {
 						double zahl2 = Double.parseDouble(moneyField.getText());
 						maschine.withdraw(zahl2);
@@ -341,8 +349,23 @@ public class Controller {
 
 	@FXML
 	void NewAccount() {
-		AccountController ac = new AccountController();
-		ac.initialize();
-	}
+		NewAccount.setOnAction(new EventHandler<ActionEvent>() {
 
+			@Override
+			public void handle(ActionEvent event) {
+				try {
+					Parent root = FXMLLoader.load(getClass().getResource(
+							"/res/account.fxml"));
+					Scene as = new Scene(root);
+					Stage asd = new Stage();
+					asd.setScene(as);
+					asd.show();
+
+				} catch (IOException e) {
+					System.out.println("error");
+				}
+				event.consume();
+			}
+		});
+	}
 }
