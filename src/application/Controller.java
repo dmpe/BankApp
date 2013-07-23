@@ -1,29 +1,19 @@
 package application;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.*;
 import java.util.*;
-
-import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
-
-import exceptions.CardInsertedException;
-import exceptions.CardNotInsertedException;
-import exceptions.InvalidCardException;
-import exceptions.NotEnoughMoneyException;
-import exceptions.PinNotCorectException;
+import exceptions.*;
 import javafx.collections.*;
 import javafx.event.*;
 import javafx.fxml.*;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import logic.Account;
-import logic.CashCard;
-import logic.CashMachine;
+import javafx.scene.input.*;
+import logic.*;
+import jfxtras.labs.dialogs.*;
+import jfxtras.labs.dialogs.MonologFX.*;
 
-public class New {
+public class Controller {
 
 	@FXML
 	private ResourceBundle resources;
@@ -132,6 +122,7 @@ public class New {
 
 		chooseYourMoney.setDisable(true);
 		moneyField.setDisable(true);
+		accountStatement.setDisable(true);
 
 		free.setToggleGroup(group);
 		choice.setToggleGroup(group);
@@ -161,6 +152,8 @@ public class New {
 					System.out.println(e.getMessage());
 				} catch (InvalidCardException e) {
 					System.out.println(e.getMessage());
+				} catch (NumberFormatException e) {
+					infoText.appendText("\nYou can't do this");
 				}
 				accountField.setEditable(false);
 				event.consume();
@@ -184,9 +177,12 @@ public class New {
 					System.out.println(e.getMessage());
 				} catch (InvalidCardException e) {
 					System.out.println(e.getMessage());
+				} catch (NumberFormatException e) {
+					infoText.appendText("\nYou can't do this");
 				}
 				pinField.setEditable(false);
-				infoText.appendText("\n take your card out, then you can change the number again");
+				accountStatement.setDisable(false);
+				// infoText.appendText("\n take your card out, then you can change the number again");
 				event.consume();
 			}
 		});
@@ -210,6 +206,8 @@ public class New {
 								System.out.println(e.getMessage());
 							} catch (InvalidCardException e) {
 								System.out.println(e.getMessage());
+							} catch (NumberFormatException e) {
+								infoText.appendText("\nYou can't do this");
 							}
 							accountField.setEditable(false);
 						}
@@ -251,6 +249,8 @@ public class New {
 								System.out.println(e.getMessage());
 							} catch (InvalidCardException e) {
 								System.out.println(e.getMessage());
+							} catch (NumberFormatException e) {
+								infoText.appendText("\nYou can't do this");
 							}
 							pinField.setEditable(false);
 						}
@@ -314,6 +314,8 @@ public class New {
 					System.out.println(e.getMessage());
 				} catch (NotEnoughMoneyException e) {
 					System.out.println(e.getMessage());
+				} catch (NumberFormatException e) {
+					infoText.appendText("\nYou can't do this");
 				}
 				event.consume();
 			} // here end of the small method
@@ -322,16 +324,25 @@ public class New {
 
 	@FXML
 	void About() throws IOException {
-		Parent root3 = FXMLLoader.load(getClass().getResource("/res/alertdialog.fxml"));
-		
-		
+		About.setOnAction(new EventHandler<ActionEvent>() {
 
-			
-		
+			@Override
+			public void handle(ActionEvent event) {
+				// user must do sth. before click on this
+				// or he must click 2 times
+				MonologFX mf = new MonologFX(Type.INFO);
+				mf.setMessage("Created by @Malcjohn");
+				mf.setTitleText("About this app");
+				mf.showDialog();
+			}
+		});
+
 	}
 
 	@FXML
 	void NewAccount() {
+		AccountController ac = new AccountController();
+		ac.initialize();
 	}
 
 }

@@ -1,22 +1,16 @@
 package application;
 
-import javafx.application.Application;
+import javafx.application.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.scene.image.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import logic.Account;
+import javafx.stage.*;
 
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		AnchorPane ap = new AnchorPane();
-
 		Parent root = FXMLLoader.load(getClass().getResource(
 				"/res/default.fxml"));
-		Parent root2 = FXMLLoader.load(getClass().getResource(
-				"/res/account.fxml"));
 		Scene frame = new Scene(root);
 		primaryStage.getIcons().add(new Image("/res/icon.png"));
 		primaryStage.isResizable();

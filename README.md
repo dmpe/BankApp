@@ -18,7 +18,13 @@ You are *W E L C O M E* to make issues & and your pull requests. I will look on 
 
 **License: MIT** 
 
-(do whatever you need to do, I don't care)
+Do whatever you need to do, I don't care. I use libraries so must comply with them too.
+
+**Libraries used**
+
+1. [JavaFX Dialogs](https://github.com/marcojakob/javafx-ui-sandbox/tree/master/javafx-dialogs)
+
+2. [JFXtras](https://github.com/JFXtras/jfxtras-labs)
 
 **BLOG**
 

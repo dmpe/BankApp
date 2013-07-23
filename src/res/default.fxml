@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.New">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.Controller">
   <children>
     <MenuBar fx:id="MenuBar" layoutX="0.0" layoutY="0.0" prefHeight="33.000091552734375" prefWidth="600.0">
       <menus>
@@ -18,7 +18,7 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Help" fx:id="MenuHelp">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#About" text="About this App" fx:id="About" />
+            <MenuItem mnemonicParsing="false" onAction="#About" text="About App" fx:id="About" />
           </items>
         </Menu>
       </menus>
@@ -42,6 +42,6 @@
       </items>
     </ComboBox>
     <RadioButton id="Free" fx:id="free" layoutX="152.0" layoutY="220.0" mnemonicParsing="false" text="Free" />
-    <Button fx:id="accountStatement" layoutX="220.0" layoutY="127.0" mnemonicParsing="false" onAction="#accountStatement" prefHeight="35.0" prefWidth="160.0" text="Button" />
+    <Button fx:id="accountStatement" layoutX="220.0" layoutY="127.0" mnemonicParsing="false" onAction="#accountStatement" prefHeight="35.0" prefWidth="160.0" text="Account Statement" />
   </children>
 </AnchorPane>
