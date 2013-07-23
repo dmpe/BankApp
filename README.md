@@ -8,7 +8,7 @@ This application **simulates ATM** (which is our GUI) for your bank account. In 
 
 Application is based on 2 exercises I have done during my 2. semester at the university. All of them are here, [on github](https://github.com/Johnmalc/Homeworks2), and one of them is this [one](https://github.com/Johnmalc/Homeworks2/tree/master/Aufgabe1) and another one is [here](https://github.com/Johnmalc/Homeworks2/tree/master/Aufgabe13). The main logic is taken from [here](https://github.com/Johnmalc/Homeworks2/tree/master/Aufgabe13) (not GUI/Vars/Main.java).
 
-This is how the app look like (based only on the FXML design; subjected to change):
+This is how the app looks something like (based on the FXML design; subjected to change) this:
 
 ![Design](/image.jpg)
 
@@ -30,7 +30,7 @@ Do whatever you need to do, I don't care. I use libraries so must comply with th
 
 Look more on my blog where I have wrote about it.
 
-Here (TBA)
+Here [http://www.komentovaneudalosti.cz/blog/?p=1126](http://www.komentovaneudalosti.cz/blog/?p=1126)
 
 **Features in the future** 
 
