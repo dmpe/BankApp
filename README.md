@@ -34,5 +34,22 @@ Here [http://www.komentovaneudalosti.cz/blog/?p=1126](http://www.komentovaneudal
 
 **Features in the future** 
 
-1. [] Allow to add accounts in the cashmaschine dynamically, through another fxml model. Nice to create some menu 
+1. [X] Allow to add accounts in the cashmaschine dynamically, through another fxml model. Nice to create some menu **See Problems**
 2. [x] TextField should be done with Scrollbar
+
+----------
+
+- If clicked on new account then must be clicked 2 to get a new scene
+- Doesn't save the new account
+- to add some close button > delete menu label and correct the print all accounts button
+- try to change methods to allow delete in textfields
+- kdyz zadas pin a nestisknes ok, tak se to druhe okno 
+- make it dynamic resizable
+- udelat "new" pristisknuti account statement
+- https://forums.oracle.com/thread/2543153
+- http://code.metager.de/source/xref/netbeans/javafx2.samples/FXML-LoginDemo/src/demo/Main.java
+- http://docs.oracle.com/javafx/2/api/index.html?javafx/stage/Window.html
+- http://stackoverflow.com/questions/15041760/javafx-open-new-window
+- https://gist.github.com/jewelsea/1887631
+- http://stackoverflow.com/questions/10486731/how-to-create-a-modal-window-in-javafx-2-1
+- http://java-buddy.blogspot.cz/2012/12/open-new-window-in-javafx-2.html
