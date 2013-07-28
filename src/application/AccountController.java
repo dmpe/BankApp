@@ -98,7 +98,7 @@ public class AccountController {
 							ac.setAccountNumber(AccountNumber);
 							TextArea.appendText("\nEverything allright: "
 									+ AccountNumberField.getText());
-							//AccountNumberField.setDisable(true);
+							AccountNumberField.setDisable(true);
 						}
 					}
 				});

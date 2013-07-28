@@ -39,12 +39,9 @@ Here [http://www.komentovaneudalosti.cz/blog/?p=1126](http://www.komentovaneudal
 
 ----------
 
-- If clicked on new account then must be clicked 2 to get a new scene
-- if click print accounts must be able to get immediatelly ones 
 - to add some close button > delete menu label and correct the print all accounts button
-- try to change methods to allow delete in textfields
-- make it dynamic resizable
-- udelat "new" pristisknuti account statement
+- try to change methods to allow delete in textfields [bug see this](https://forums.oracle.com/thread/2564384)
+- make it dynamic resizable > grid
 - https://forums.oracle.com/thread/2543153
 - http://code.metager.de/source/xref/netbeans/javafx2.samples/FXML-LoginDemo/src/demo/Main.java
 - http://docs.oracle.com/javafx/2/api/index.html?javafx/stage/Window.html
