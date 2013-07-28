@@ -16,12 +16,12 @@
     <Label layoutX="33.0" layoutY="277.0" text="Pin (min. 4 numbers)" />
     <Label layoutX="33.0" layoutY="213.0" text="Cash" />
     <PasswordField id="PinFiled" fx:id="PinField" layoutX="156.0" layoutY="277.0" onAction="#PinFieldMethod" prefWidth="130.0" />
-    <Label layoutX="272.0" layoutY="37.0" text="Menu" />
     <Button fx:id="ButtonAccountNumber" layoutX="356.0" layoutY="75.0" mnemonicParsing="false" onAction="#ButtonAccountNumberMethod" prefHeight="22.0" prefWidth="200.0" text="Send" />
     <Button fx:id="ButtonOverdraft" layoutX="356.0" layoutY="142.0" mnemonicParsing="false" onAction="#ButtonOverdraftMethod" prefWidth="200.0" text="Send" />
     <Button fx:id="ButtonCash" layoutX="356.0" layoutY="211.0" mnemonicParsing="false" onAction="#ButtonCashMethod" prefWidth="200.0" text="Send" />
     <Button fx:id="ButtonPin" layoutX="356.0" layoutY="278.0" mnemonicParsing="false" onAction="#ButtonPinMethod" prefWidth="200.0" text="Send" />
     <TextArea fx:id="TextArea" editable="false" layoutX="33.0" layoutY="309.0" prefHeight="77.0" prefWidth="523.0" wrapText="false" />
     <Button fx:id="printButton" layoutX="60.0" layoutY="25.0" mnemonicParsing="false" onAction="#printAllAccounts" prefHeight="37.0" prefWidth="157.0" text="Print all accounts" />
+    <Button fx:id="saveAccount" layoutX="284.0" layoutY="26.0" mnemonicParsing="false" onAction="#Save" prefHeight="37.0" prefWidth="157.0" text="Save new account" />
   </children>
 </AnchorPane>

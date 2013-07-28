@@ -160,11 +160,55 @@ public class Controller {
 				} catch (CardInsertedException e) {
 					System.out.println(e.getMessage());
 				} catch (InvalidCardException e) {
-					System.out.println(e.getMessage());
+					infoText.appendText("\nWrong account number");
 				} catch (NumberFormatException e) {
 					infoText.appendText("\nYou can't do this");
 				}
 				accountField.setEditable(false);
+				accountStatement.setDisable(false);
+				event.consume();
+			}
+		});
+	}
+
+	@FXML
+	void accountField() {
+		accountField.addEventFilter(KeyEvent.KEY_PRESSED,
+				new EventHandler<KeyEvent>() {
+
+					@Override
+					public void handle(KeyEvent event) {
+						if (event.getCode() == KeyCode.ENTER) {
+							try {
+								int karteNummer = Integer.parseInt(accountField
+										.getText());
+								cashCard.setAccountNumber(karteNummer);
+								maschine.insertCashCard(cashCard);
+								infoText.appendText("\nYou have inserted a card in ATM");
+							} catch (CardInsertedException e) {
+								System.out.println(e.getMessage());
+							} catch (InvalidCardException e) {
+								infoText.appendText("\nWrong account number");
+							} catch (NumberFormatException e) {
+								infoText.appendText("\nYou can't do this");
+							}
+							accountField.setEditable(false);
+							accountStatement.setDisable(false);
+						}
+						event.consume();
+					}
+				});
+	}
+
+	@FXML
+	void accountStatement() {
+		accountStatement.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				infoText.appendText("\n" + maschine.accountStatementMethod());
+				moneyField.setDisable(false);
+				chooseYourMoney.setDisable(false);
 				event.consume();
 			}
 		});
@@ -192,48 +236,6 @@ public class Controller {
 				pinField.setEditable(false);
 				accountStatement.setDisable(false);
 				// infoText.appendText("\n take your card out, then you can change the number again");
-				event.consume();
-			}
-		});
-	}
-
-	@FXML
-	void accountField() {
-		accountField.addEventFilter(KeyEvent.KEY_PRESSED,
-				new EventHandler<KeyEvent>() {
-
-					@Override
-					public void handle(KeyEvent event) {
-						if (event.getCode() == KeyCode.ENTER) {
-							try {
-								int karteNummer = Integer.parseInt(accountField
-										.getText());
-								cashCard.setAccountNumber(karteNummer);
-								maschine.insertCashCard(cashCard);
-								infoText.appendText("\nYou have inserted a card in ATM");
-							} catch (CardInsertedException e) {
-								System.out.println(e.getMessage());
-							} catch (InvalidCardException e) {
-								System.out.println(e.getMessage());
-							} catch (NumberFormatException e) {
-								infoText.appendText("\nYou can't do this");
-							}
-							accountField.setEditable(false);
-						}
-						event.consume();
-					}
-				});
-	}
-
-	@FXML
-	void accountStatement() {
-		accountStatement.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				infoText.appendText("\n" + maschine.accountStatementMethod());
-				moneyField.setDisable(false);
-				chooseYourMoney.setDisable(false);
 				event.consume();
 			}
 		});
@@ -353,14 +355,14 @@ public class Controller {
 
 			@Override
 			public void handle(ActionEvent event) {
+				Parent root;
 				try {
-					Parent root = FXMLLoader.load(getClass().getResource(
+					root = FXMLLoader.load(getClass().getResource(
 							"/res/account.fxml"));
 					Scene as = new Scene(root);
 					Stage asd = new Stage();
 					asd.setScene(as);
-					asd.show();
-
+					asd.show();					
 				} catch (IOException e) {
 					System.out.println("error");
 				}

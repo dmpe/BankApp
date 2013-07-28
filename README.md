@@ -40,10 +40,9 @@ Here [http://www.komentovaneudalosti.cz/blog/?p=1126](http://www.komentovaneudal
 ----------
 
 - If clicked on new account then must be clicked 2 to get a new scene
-- Doesn't save the new account
+- if click print accounts must be able to get immediatelly ones 
 - to add some close button > delete menu label and correct the print all accounts button
 - try to change methods to allow delete in textfields
-- kdyz zadas pin a nestisknes ok, tak se to druhe okno 
 - make it dynamic resizable
 - udelat "new" pristisknuti account statement
 - https://forums.oracle.com/thread/2543153

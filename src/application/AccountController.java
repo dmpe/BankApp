@@ -9,6 +9,7 @@ import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
+import javafx.stage.Stage;
 
 public class AccountController {
 
@@ -32,6 +33,9 @@ public class AccountController {
 
 	@FXML
 	private Button printButton;
+
+	@FXML
+	private Button saveAccount;
 
 	@FXML
 	private TextField AccountNumberField;
@@ -90,8 +94,9 @@ public class AccountController {
 							int AccountNumber = Integer
 									.parseInt(AccountNumberField.getText());
 							ac.setAccountNumber(AccountNumber);
-							TextArea.appendText("Everything allright: "
+							TextArea.appendText("\nEverything allright: "
 									+ AccountNumberField.getText());
+							AccountNumberField.setDisable(true);
 						}
 					}
 				});
@@ -142,6 +147,7 @@ public class AccountController {
 							ac.setBankDeposit(overdraft);
 							TextArea.appendText("\nEverything allright: "
 									+ CashField.getText());
+							CashField.setDisable(true);
 						}
 					}
 				});
@@ -176,6 +182,7 @@ public class AccountController {
 							ac.setOverdraft(overdraft);
 							TextArea.appendText("\nEverything allright: "
 									+ OverdraftField.getText());
+							OverdraftField.setDisable(true);
 						}
 					}
 				});
@@ -212,8 +219,9 @@ public class AccountController {
 							int pin = Integer.parseInt(PinField.getText());
 							try {
 								ac.setPin(pin);
-								TextArea.appendText("\n Everything allright: "
+								TextArea.appendText("\nEverything allright: "
 										+ PinField.getText());
+								PinField.setDisable(true);
 							} catch (WrongQuantityOfDigits e) {
 								TextArea.appendText("\nOnly 4 number are allowed");
 							}
@@ -229,9 +237,24 @@ public class AccountController {
 			@Override
 			public void handle(ActionEvent event) {
 				Iterator<Account> s = cm.iterator();
+				TextArea.appendText("-----------");
 				while (s.hasNext()) {
 					TextArea.appendText("\n" + s.next());
 				}
+			}
+		});
+	}
+
+	@FXML
+	void Save() {
+		saveAccount.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				Account saveNewOne = new Account(ac.getAccountNumber(), ac
+						.getOverdraft(), ac.getBankDeposit(), ac.getPin());
+				cm.addNewAccount(saveNewOne);
+				TextArea.appendText("\nYou have saved new account");
 			}
 		});
 	}

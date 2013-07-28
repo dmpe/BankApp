@@ -194,12 +194,23 @@ public class CashMachine<K> implements Iterable<Account> {
 			throw new CardNotInsertedException();
 		}
 	}
-	/*
+
+	/**
 	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Iterable#iterator()
 	 */
 	@Override
 	public Iterator<Account> iterator() {
 		return accounts.iterator();
 	}
+
+	/**
+	 * Gets a new account and saves it in the list 
+	 * Method used by the AccountController class
+	 */
+	public void addNewAccount(Account ac) {
+		accounts.add(ac);
+	}
+
 }
