@@ -12,6 +12,7 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.*;
 import javafx.stage.*;
 import logic.*;
 import jfxtras.labs.dialogs.*;
@@ -108,7 +109,7 @@ public class Controller {
 	CashCard cashCard = new CashCard();
 
 	@FXML
-	void initialize() {
+	void initialize() throws Exception {
 		assert About != null : "fx:id=\"About\" was not injected: check your FXML file 'default.fxml'.";
 		assert MenuBar != null : "fx:id=\"MenuBar\" was not injected: check your FXML file 'default.fxml'.";
 		assert MenuFile != null : "fx:id=\"MenuFile\" was not injected: check your FXML file 'default.fxml'.";
@@ -143,6 +144,8 @@ public class Controller {
 		withdraw();
 		removeCard();
 		pinField();
+		About();
+		NewAccount();
 
 	}
 
@@ -359,10 +362,9 @@ public class Controller {
 				try {
 					root = FXMLLoader.load(getClass().getResource(
 							"/res/account.fxml"));
-					Scene as = new Scene(root);
-					Stage asd = new Stage();
-					asd.setScene(as);
-					asd.show();					
+					Stage stage = new Stage();
+					stage.setScene(new Scene(new Group(root)));
+					stage.show();
 				} catch (IOException e) {
 					System.out.println("error");
 				}

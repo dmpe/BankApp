@@ -9,7 +9,7 @@ import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
-import javafx.stage.Stage;
+import javafx.stage.*;
 
 public class AccountController {
 
@@ -79,6 +79,8 @@ public class AccountController {
 		ButtonPinMethod();
 		OverdraftFieldMethod();
 		ButtonOverdraftMethod();
+		Save();
+		printAllAccounts();
 
 	}
 
@@ -96,7 +98,7 @@ public class AccountController {
 							ac.setAccountNumber(AccountNumber);
 							TextArea.appendText("\nEverything allright: "
 									+ AccountNumberField.getText());
-							AccountNumberField.setDisable(true);
+							//AccountNumberField.setDisable(true);
 						}
 					}
 				});
