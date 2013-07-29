@@ -11,17 +11,16 @@ public class CashMachine<K> implements Iterable<Account> {
 	}
 
 	List<Account> accounts;
+	Account ac;
 	private CashCard cashCard;
 	private State state;
-	private int index; // Number of account in the list
+
+	Account a1 = new Account(23456789, -100.0, 2000, 1234);
+	Account a2 = new Account(34567890, -200.0, 3000, 1234);
+	Account a3 = new Account(12345678, 0.0, 50000, 1234);
 
 	public CashMachine() {
-		index = 0;
 		state = State.READY;
-
-		Account a1 = new Account(23456789, -100.0, 2000, 1234);
-		Account a2 = new Account(34567890, -200.0, 3000, 1234);
-		Account a3 = new Account(12345678, 0.0, 50000, 1234);
 
 		// new predefined accounts
 		accounts = new LinkedList<Account>();
@@ -47,26 +46,21 @@ public class CashMachine<K> implements Iterable<Account> {
 		case READY:
 			cashCard = cashCardX;
 			/*
-			 * Sucht die passende Konto nach AccountNummer muss man andern wegen
-			 * Iterable > alte for loop
+			 * Sucht die passende Konto nach AccountNummer
 			 */
-			for (int i = 0; i < accounts.size(); i++) {
-				if ((accounts.get(i).getAccountNumber()) == (cashCard
-						.getAccountNumber())) {
+			for (Account acc : accounts) {
+				System.out.println(accounts.size());
+				if ((acc.getAccountNumber()) == (cashCard.getAccountNumber())) {
 					/*
 					 * wenn account nummer und carten-account nummer entspricht
 					 * > speichere index, damit man weiter mit dem richtigen
 					 * (passenden) Account arbeiten kann
 					 */
-					this.index = i;
+					this.ac = acc;
 					state = State.CARD_INSERTED;
 					break;
 				} else {
-					index++;
-					if (index >= accounts.size()) {
-						state = State.READY;
-						throw new InvalidCardException();
-					}
+					throw new InvalidCardException();
 				}
 			}
 			break;
@@ -93,7 +87,7 @@ public class CashMachine<K> implements Iterable<Account> {
 			CardNotInsertedException, InvalidCardException {
 		switch (state) {
 		case CARD_INSERTED:
-			if (accounts.get(index).getPin() == pinX) {
+			if (ac.getPin() == pinX) {
 				state = State.PIN_CORRECT;
 				System.out.println("Sie haben den richtigen Pin eingegeben.");
 				System.out.println("Automat ist auf Status " + state
@@ -122,16 +116,14 @@ public class CashMachine<K> implements Iterable<Account> {
 			NotEnoughMoneyException {
 		switch (state) {
 		case PIN_CORRECT:
-			System.out.println("Ihr Kontoguthaben ist: "
-					+ accounts.get(index).getBankDeposit() + " Euro.");
-			if (accounts.get(index).getBankDeposit() - amount >= accounts.get(
-					index).getOverdraft()) {
-				accounts.get(index).setBankDeposit(
-						accounts.get(index).getBankDeposit() - amount);
+			System.out.println("Ihr Kontoguthaben ist: " + ac.getBankDeposit()
+					+ " Euro.");
+			if (ac.getBankDeposit() - amount >= ac.getOverdraft()) {
+				ac.setBankDeposit(ac.getBankDeposit() - amount);
 				System.out.println("Sie haben erfolgreich " + amount
 						+ " Euro abgehoben.");
 				System.out.println("Ihr Kontoguthaben ist: "
-						+ accounts.get(index).getBankDeposit() + " Euro.");
+						+ ac.getBankDeposit() + " Euro.");
 			} else {
 				throw new NotEnoughMoneyException();
 			}
@@ -152,10 +144,9 @@ public class CashMachine<K> implements Iterable<Account> {
 		// tests if states are correctly set
 		if (state == State.CARD_INSERTED || state == State.PIN_CORRECT) {
 			System.out.println("\n" + "Account Statement: " + "\n"
-					+ "Account Nr.: " + accounts.get(index).getAccountNumber()
-					+ "\n" + "Bank Deposit: "
-					+ accounts.get(index).getBankDeposit() + "\n"
-					+ "Overdraft: " + accounts.get(index).getOverdraft());
+					+ "Account Nr.: " + ac.getAccountNumber() + "\n"
+					+ "Bank Deposit: " + ac.getBankDeposit() + "\n"
+					+ "Overdraft: " + ac.getOverdraft());
 		} else {
 			throw new CardNotInsertedException();
 		}
@@ -166,10 +157,13 @@ public class CashMachine<K> implements Iterable<Account> {
 	 * @return all the details from the account which is being used
 	 */
 	public String accountStatementMethod() {
-		return "Account Statement: " + "\n" + "Account Nr.: "
-				+ accounts.get(index).getAccountNumber() + "\n"
-				+ "Bank Deposit: " + accounts.get(index).getBankDeposit()
-				+ "\n" + "Overdraft: " + accounts.get(index).getOverdraft();
+		for (Account acc : accounts) {
+			return "Account Statement: " + "\n" + "Account Nr.: "
+					+ acc.getAccountNumber() + "\n" + "Bank Deposit: "
+					+ acc.getBankDeposit() + "\n" + "Overdraft: "
+					+ acc.getOverdraft();
+		}
+		return null;
 	}
 
 	/**
@@ -186,7 +180,6 @@ public class CashMachine<K> implements Iterable<Account> {
 	public void ejectCashCard() throws CardNotInsertedException {
 		if (state == State.CARD_INSERTED || state == State.PIN_CORRECT) {
 			cashCard = null;
-			index = 0;
 			state = State.READY;
 			System.out.println("Ihr Karte ist entfernt!");
 			System.out.println("Automat ist auf Status " + state + " gesetzt.");
@@ -206,11 +199,22 @@ public class CashMachine<K> implements Iterable<Account> {
 	}
 
 	/**
-	 * Gets a new account and saves it in the list 
-	 * Method used by the AccountController class
+	 * Gets a new account and saves it in the list Method used by the
+	 * AccountController class
 	 */
-	public void addNewAccount(Account ac) {
-		accounts.add(ac);
+	public void addNewAccount(Account no) {
+		accounts.add(no);
+		System.out.println("account size : " + accounts.size());
+		System.out.println("\n");
+		System.out.println(getAllAccount());
+	}
+
+	/**
+	 * 
+	 * @return all accounts
+	 */
+	public String getAllAccount() {
+		return accounts.toString();
 	}
 
 }

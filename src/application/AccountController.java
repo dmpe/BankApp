@@ -9,7 +9,7 @@ import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
-import javafx.stage.*;
+import javafx.scene.layout.*;
 
 public class AccountController {
 
@@ -18,6 +18,9 @@ public class AccountController {
 
 	@FXML
 	private URL location;
+
+	@FXML
+	private HBox hbox;
 
 	@FXML
 	private Button ButtonAccountNumber;
@@ -70,6 +73,7 @@ public class AccountController {
 		assert PinField != null : "fx:id=\"PinField\" was not injected: check your FXML file 'Account.fxml'.";
 		assert TextArea != null : "fx:id=\"TextArea\" was not injected: check your FXML file 'Account.fxml'.";
 		assert printButton != null : "fx:id=\"printButton\" was not injected: check your FXML file 'account.fxml'.";
+		assert hbox != null : "fx:id=\"hbox\" was not injected: check your FXML file 'account.fxml'.";
 
 		AccountNumberMethod();
 		ButtonAccountNumberMethod();
@@ -116,6 +120,8 @@ public class AccountController {
 				ac.setAccountNumber(AccountNumber);
 				TextArea.appendText("\nEverything allright: "
 						+ AccountNumberField.getText());
+				AccountNumberField.setDisable(true);
+
 			}
 		});
 	}
@@ -131,6 +137,8 @@ public class AccountController {
 				ac.setBankDeposit(zahl);
 				TextArea.appendText("\nEverything allright: "
 						+ CashField.getText());
+				CashField.setDisable(true);
+
 			}
 		});
 	}
@@ -166,6 +174,8 @@ public class AccountController {
 				ac.setOverdraft(overdraft);
 				TextArea.appendText("\nEverything allright: "
 						+ OverdraftField.getText());
+				OverdraftField.setDisable(true);
+
 			}
 		});
 	}
@@ -202,6 +212,7 @@ public class AccountController {
 					ac.setPin(pin);
 					TextArea.appendText("\nEverything allright: "
 							+ PinField.getText());
+					PinField.setDisable(true);
 				} catch (WrongQuantityOfDigits e) {
 					TextArea.appendText("\nOnly 4 number are allowed");
 				}
@@ -239,7 +250,8 @@ public class AccountController {
 			@Override
 			public void handle(ActionEvent event) {
 				Iterator<Account> s = cm.iterator();
-				TextArea.appendText("-----------");
+				TextArea.appendText("\nUnsaved accounts will NOT be printed");
+				TextArea.appendText(" ");
 				while (s.hasNext()) {
 					TextArea.appendText("\n" + s.next());
 				}
@@ -253,10 +265,16 @@ public class AccountController {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				Account saveNewOne = new Account(ac.getAccountNumber(), ac
-						.getOverdraft(), ac.getBankDeposit(), ac.getPin());
+				int number = ac.getAccountNumber();
+				double deposit = ac.getBankDeposit();
+				double overdraft = ac.getOverdraft();
+				int pin = ac.getPin();
+
+				Account saveNewOne = new Account(number, overdraft, deposit,
+						pin);
 				cm.addNewAccount(saveNewOne);
 				TextArea.appendText("\nYou have saved new account");
+
 			}
 		});
 	}

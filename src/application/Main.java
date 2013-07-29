@@ -15,7 +15,6 @@ public class Main extends Application {
 		primaryStage.getIcons().add(new Image("/res/icon.png"));
 		primaryStage.isResizable();
 		primaryStage.setTitle("Bank Business created by @malcjohn");
-
 		primaryStage.setScene(frame);
 		primaryStage.centerOnScreen();
 		primaryStage.show();

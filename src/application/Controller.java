@@ -10,9 +10,9 @@ import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
-import javafx.scene.text.*;
 import javafx.stage.*;
 import logic.*;
 import jfxtras.labs.dialogs.*;
@@ -168,7 +168,7 @@ public class Controller {
 					infoText.appendText("\nYou can't do this");
 				}
 				accountField.setEditable(false);
-				accountStatement.setDisable(false);
+				accountStatement.setDisable(true);
 				event.consume();
 			}
 		});
@@ -196,7 +196,7 @@ public class Controller {
 								infoText.appendText("\nYou can't do this");
 							}
 							accountField.setEditable(false);
-							accountStatement.setDisable(false);
+							accountStatement.setDisable(true);
 						}
 						event.consume();
 					}
@@ -267,6 +267,7 @@ public class Controller {
 								infoText.appendText("\nYou can't do this");
 							}
 							pinField.setEditable(false);
+							accountStatement.setDisable(false);
 						}
 						event.consume();
 					}
@@ -363,7 +364,10 @@ public class Controller {
 					root = FXMLLoader.load(getClass().getResource(
 							"/res/account.fxml"));
 					Stage stage = new Stage();
-					stage.setScene(new Scene(new Group(root)));
+					Scene scene = new Scene(root);
+					stage.setTitle("Create new account");
+					stage.setScene(scene);
+					stage.getIcons().add(new Image("/res/account.png"));
 					stage.show();
 				} catch (IOException e) {
 					System.out.println("error");
