@@ -10,20 +10,18 @@ public class CashMachine<K> implements Iterable<Account> {
 		READY, CARD_INSERTED, PIN_CORRECT, PIN_WRONG
 	}
 
-	List<Account> accounts;
+	List<Account> accounts = new LinkedList<Account>();
 	Account ac;
 	private CashCard cashCard;
 	private State state;
 
-	Account a1 = new Account(23456789, -100.0, 2000, 1234);
-	Account a2 = new Account(34567890, -200.0, 3000, 1234);
-	Account a3 = new Account(12345678, 0.0, 50000, 1234);
-
 	public CashMachine() {
 		state = State.READY;
 
+		Account a1 = new Account(23456789, -100.0, 2000, 1234);
+		Account a2 = new Account(34567890, -200.0, 3000, 1234);
+		Account a3 = new Account(12345678, 0.0, 50000, 1234);
 		// new predefined accounts
-		accounts = new LinkedList<Account>();
 		accounts.add(a1);
 		accounts.add(a2);
 		accounts.add(a3);
@@ -51,16 +49,13 @@ public class CashMachine<K> implements Iterable<Account> {
 			for (Account acc : accounts) {
 				System.out.println(accounts.size());
 				if ((acc.getAccountNumber()) == (cashCard.getAccountNumber())) {
-					/*
-					 * wenn account nummer und carten-account nummer entspricht
-					 * > speichere index, damit man weiter mit dem richtigen
-					 * (passenden) Account arbeiten kann
-					 */
 					this.ac = acc;
 					state = State.CARD_INSERTED;
 					break;
 				} else {
-					throw new InvalidCardException();
+					continue;
+					// TODO
+					// throw new InvalidCardException();
 				}
 			}
 			break;
@@ -157,13 +152,10 @@ public class CashMachine<K> implements Iterable<Account> {
 	 * @return all the details from the account which is being used
 	 */
 	public String accountStatementMethod() {
-		for (Account acc : accounts) {
-			return "Account Statement: " + "\n" + "Account Nr.: "
-					+ acc.getAccountNumber() + "\n" + "Bank Deposit: "
-					+ acc.getBankDeposit() + "\n" + "Overdraft: "
-					+ acc.getOverdraft();
-		}
-		return null;
+		return "Account Statement: " + "\n" + "Account Nr.: "
+				+ ac.getAccountNumber() + "\n" + "Bank Deposit: "
+				+ ac.getBankDeposit() + "\n" + "Overdraft: "
+				+ ac.getOverdraft();
 	}
 
 	/**

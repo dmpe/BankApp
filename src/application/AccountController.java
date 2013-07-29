@@ -10,6 +10,7 @@ import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 
 public class AccountController {
 
@@ -265,6 +266,7 @@ public class AccountController {
 
 			@Override
 			public void handle(ActionEvent arg0) {
+				final Stage window = new Stage();
 				int number = ac.getAccountNumber();
 				double deposit = ac.getBankDeposit();
 				double overdraft = ac.getOverdraft();
@@ -274,7 +276,7 @@ public class AccountController {
 						pin);
 				cm.addNewAccount(saveNewOne);
 				TextArea.appendText("\nYou have saved new account");
-
+				window.hide();
 			}
 		});
 	}

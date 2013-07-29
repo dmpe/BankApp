@@ -147,6 +147,7 @@ public class Controller {
 		About();
 		NewAccount();
 
+		infoText.appendText(maschine.getAllAccount());
 	}
 
 	@FXML
@@ -286,7 +287,6 @@ public class Controller {
 			@Override
 			public void handle(ActionEvent event) {
 				try {
-					maschine.ejectCashCard();
 					int zahl = accountField.getLength();
 					int zahl2 = pinField.getLength();
 					int zahl3 = infoText.getLength();
@@ -295,6 +295,7 @@ public class Controller {
 					pinField.deleteText(0, zahl2);
 					pinField.setEditable(true);
 					infoText.deleteText(0, zahl3);
+					maschine.ejectCashCard();
 				} catch (CardNotInsertedException e) {
 					System.out.println(e.getMessage());
 				}
@@ -363,7 +364,7 @@ public class Controller {
 				try {
 					root = FXMLLoader.load(getClass().getResource(
 							"/res/account.fxml"));
-					Stage stage = new Stage();
+					final Stage stage = new Stage();
 					Scene scene = new Scene(root);
 					stage.setTitle("Create new account");
 					stage.setScene(scene);

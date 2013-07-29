@@ -40,8 +40,8 @@ Here [http://www.komentovaneudalosti.cz/blog/?p=1126](http://www.komentovaneudal
 ----------
 
 - to add some close button > delete menu label and correct the print all accounts button
+- The only problem is that if i add new account, it wont get updated > listview for accounts
 - try to change methods to allow delete in textfields [bug see this](https://forums.oracle.com/thread/2564384)
-- make it dynamic resizable > grid
 - https://forums.oracle.com/thread/2543153
 - http://code.metager.de/source/xref/netbeans/javafx2.samples/FXML-LoginDemo/src/demo/Main.java
 - http://docs.oracle.com/javafx/2/api/index.html?javafx/stage/Window.html

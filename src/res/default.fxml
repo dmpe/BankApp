@@ -23,16 +23,16 @@
         </Menu>
       </menus>
     </MenuBar>
-    <TextArea id="" fx:id="infoText" disable="false" editable="false" layoutX="14.0" layoutY="279.0" prefHeight="107.0" prefWidth="234.0" text="Account | Cash | Pin&#10;23456789, 2000, 1234&#10;34567890, 3000, 1234&#10;12345678, 50000, 1234&#10;" wrapText="true" />
+    <TextArea id="" fx:id="infoText" disable="false" editable="false" layoutX="14.0" layoutY="239.0" prefHeight="147.0" prefWidth="324.0" text="Account | Cash | Pin&#10;23456789, 2000, 1234&#10;34567890, 3000, 1234&#10;12345678, 50000, 1234&#10;" wrapText="true" />
     <Button fx:id="acceptAccount" layoutX="24.0" layoutY="112.0" mnemonicParsing="false" onAction="#acceptAccount" prefHeight="50.0" prefWidth="110.0" text="OK Account" />
     <Button fx:id="removeCard" layoutX="361.0" layoutY="294.0" mnemonicParsing="false" onAction="#removeCard" prefHeight="92.0" prefWidth="160.0" text="Remove your card" />
     <Button fx:id="withdraw" layoutX="361.0" layoutY="179.0" mnemonicParsing="false" onAction="#withdraw" prefHeight="92.0" prefWidth="174.0" text="Withdraw" />
     <Button fx:id="acceptPin" layoutX="466.0" layoutY="112.0" mnemonicParsing="false" onAction="#acceptPin" prefHeight="50.0" prefWidth="92.0" text="OK Pin" />
     <TextField fx:id="accountField" layoutX="24.0" layoutY="57.0" onAction="#accountField" prefHeight="35.0" prefWidth="210.0" promptText="Account Number" />
     <TextField fx:id="pinField" layoutX="338.0" layoutY="58.0" onAction="#pinField" prefHeight="34.0" prefWidth="220.0" promptText="Pin Number" />
-    <RadioButton fx:id="choice" layoutX="21.0" layoutY="220.0" mnemonicParsing="false" text="Choice" />
-    <TextField fx:id="moneyField" layoutX="152.0" layoutY="249.0" prefWidth="110.0" promptText="Money" text="" />
-    <ComboBox fx:id="chooseYourMoney" layoutX="21.0" layoutY="249.0" prefHeight="22.0" prefWidth="110.0" promptText="Choose here">
+    <RadioButton fx:id="choice" layoutX="97.0" layoutY="179.0" mnemonicParsing="false" text="Choice" />
+    <TextField fx:id="moneyField" layoutX="228.0" layoutY="208.0" prefWidth="110.0" promptText="Money" text="" />
+    <ComboBox fx:id="chooseYourMoney" layoutX="97.0" layoutY="208.0" prefHeight="22.0" prefWidth="110.0" promptText="Choose here">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -41,7 +41,7 @@
         </FXCollections>
       </items>
     </ComboBox>
-    <RadioButton id="Free" fx:id="free" layoutX="152.0" layoutY="220.0" mnemonicParsing="false" text="Free" />
+    <RadioButton id="Free" fx:id="free" layoutX="228.0" layoutY="179.0" mnemonicParsing="false" text="Free" />
     <Button fx:id="accountStatement" layoutX="220.0" layoutY="127.0" mnemonicParsing="false" onAction="#accountStatement" prefHeight="35.0" prefWidth="160.0" text="Account Statement" />
   </children>
 </AnchorPane>
