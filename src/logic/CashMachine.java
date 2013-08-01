@@ -7,13 +7,13 @@ import exceptions.*;
 public class CashMachine<K> implements Iterable<Account> {
 
 	public enum State {
-		READY, CARD_INSERTED, PIN_CORRECT, PIN_WRONG
+		READY, CARD_INSERTED, PIN_CORRECT, PIN_WRONG,
 	}
 
 	List<Account> accounts = new LinkedList<Account>();
 	Account ac;
-	private CashCard cashCard;
-	private State state;
+	CashCard cashCard;
+	State state;
 
 	public CashMachine() {
 		state = State.READY;
@@ -25,6 +25,11 @@ public class CashMachine<K> implements Iterable<Account> {
 		accounts.add(a1);
 		accounts.add(a2);
 		accounts.add(a3);
+
+		System.out.println(accounts.get(0));
+		System.out.println(accounts.get(1));
+		System.out.println(accounts.get(2));
+
 	}
 
 	/**
@@ -47,15 +52,10 @@ public class CashMachine<K> implements Iterable<Account> {
 			 * Sucht die passende Konto nach AccountNummer
 			 */
 			for (Account acc : accounts) {
-				System.out.println(accounts.size());
 				if ((acc.getAccountNumber()) == (cashCard.getAccountNumber())) {
 					this.ac = acc;
 					state = State.CARD_INSERTED;
 					break;
-				} else {
-					continue;
-					// TODO
-					// throw new InvalidCardException();
 				}
 			}
 			break;
@@ -152,7 +152,7 @@ public class CashMachine<K> implements Iterable<Account> {
 	 * @return all the details from the account which is being used
 	 */
 	public String accountStatementMethod() {
-		return "Account Statement: " + "\n" + "Account Nr.: "
+		return "\n" + "Account Statement: " + "\n" + "Account Nr.: "
 				+ ac.getAccountNumber() + "\n" + "Bank Deposit: "
 				+ ac.getBankDeposit() + "\n" + "Overdraft: "
 				+ ac.getOverdraft();

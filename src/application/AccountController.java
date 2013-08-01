@@ -8,7 +8,6 @@ import logic.*;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
-import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -19,9 +18,6 @@ public class AccountController {
 
 	@FXML
 	private URL location;
-
-	@FXML
-	private HBox hbox;
 
 	@FXML
 	private Button ButtonAccountNumber;
@@ -42,19 +38,22 @@ public class AccountController {
 	private Button saveAccount;
 
 	@FXML
-	private TextField AccountNumberField;
-
-	@FXML
 	private TextField CashField;
 
 	@FXML
 	private TextField OverdraftField;
 
 	@FXML
+	private TextField AccountNumberField;
+
+	@FXML
 	private PasswordField PinField;
 
 	@FXML
 	private TextArea TextArea;
+
+	@FXML
+	private HBox hbox;
 
 	/*
 	 * Object Account for inserting all the stuff there
@@ -76,208 +75,63 @@ public class AccountController {
 		assert printButton != null : "fx:id=\"printButton\" was not injected: check your FXML file 'account.fxml'.";
 		assert hbox != null : "fx:id=\"hbox\" was not injected: check your FXML file 'account.fxml'.";
 
-		AccountNumberMethod();
-		ButtonAccountNumberMethod();
-		ButtonCashMethod();
-		CashFieldMethod();
-		PinFieldMethod();
-		ButtonPinMethod();
-		OverdraftFieldMethod();
-		ButtonOverdraftMethod();
-		Save();
-		printAllAccounts();
-
-	}
-
-	// account number - button
-	@FXML
-	void AccountNumberMethod() {
-		AccountNumberField.addEventFilter(KeyEvent.KEY_PRESSED,
-				new EventHandler<KeyEvent>() {
-
-					@Override
-					public void handle(KeyEvent event) {
-						if (event.getCode() == KeyCode.ENTER) {
-							int AccountNumber = Integer
-									.parseInt(AccountNumberField.getText());
-							ac.setAccountNumber(AccountNumber);
-							TextArea.appendText("\nEverything allright: "
-									+ AccountNumberField.getText());
-							AccountNumberField.setDisable(true);
-						}
-					}
-				});
-	}
-
-	// account number - textfield
-	@FXML
-	void ButtonAccountNumberMethod() {
-		ButtonAccountNumber.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				int AccountNumber = Integer.parseInt(AccountNumberField
-						.getText());
-				ac.setAccountNumber(AccountNumber);
-				TextArea.appendText("\nEverything allright: "
-						+ AccountNumberField.getText());
-				AccountNumberField.setDisable(true);
-
-			}
-		});
 	}
 
 	// cash money - button
 	@FXML
-	void ButtonCashMethod() {
-		ButtonCash.setOnAction(new EventHandler<ActionEvent>() {
+	void ButtonCashMethod(ActionEvent event) {
+		double zahl = Double.parseDouble(CashField.getText());
+		ac.setBankDeposit(zahl);
+		TextArea.appendText("\nEverything allright: " + CashField.getText());
+		CashField.setDisable(true);
 
-			@Override
-			public void handle(ActionEvent event) {
-				double zahl = Double.parseDouble(CashField.getText());
-				ac.setBankDeposit(zahl);
-				TextArea.appendText("\nEverything allright: "
-						+ CashField.getText());
-				CashField.setDisable(true);
-
-			}
-		});
-	}
-
-	// cash money - field
-	@FXML
-	void CashFieldMethod() {
-		CashField.addEventFilter(KeyEvent.KEY_PRESSED,
-				new EventHandler<KeyEvent>() {
-
-					@Override
-					public void handle(KeyEvent event) {
-						if (event.getCode() == KeyCode.ENTER) {
-							double overdraft = Double.parseDouble(CashField
-									.getText());
-							ac.setBankDeposit(overdraft);
-							TextArea.appendText("\nEverything allright: "
-									+ CashField.getText());
-							CashField.setDisable(true);
-						}
-					}
-				});
 	}
 
 	// overdraft money - button
 	@FXML
-	void ButtonOverdraftMethod() {
-		ButtonOverdraft.setOnAction(new EventHandler<ActionEvent>() {
+	void ButtonOverdraftMethod(ActionEvent event) {
+		double overdraft = Double.parseDouble(OverdraftField.getText());
+		ac.setOverdraft(overdraft);
+		TextArea.appendText("\nEverything allright: "
+				+ OverdraftField.getText());
+		OverdraftField.setDisable(true);
 
-			@Override
-			public void handle(ActionEvent event) {
-				double overdraft = Double.parseDouble(OverdraftField.getText());
-				ac.setOverdraft(overdraft);
-				TextArea.appendText("\nEverything allright: "
-						+ OverdraftField.getText());
-				OverdraftField.setDisable(true);
-
-			}
-		});
-	}
-
-	// overdraft money - field
-	@FXML
-	void OverdraftFieldMethod() {
-		OverdraftField.addEventFilter(KeyEvent.KEY_PRESSED,
-				new EventHandler<KeyEvent>() {
-
-					@Override
-					public void handle(KeyEvent event) {
-						if (event.getCode() == KeyCode.ENTER) {
-							double overdraft = Double
-									.parseDouble(OverdraftField.getText());
-							ac.setOverdraft(overdraft);
-							TextArea.appendText("\nEverything allright: "
-									+ OverdraftField.getText());
-							OverdraftField.setDisable(true);
-						}
-					}
-				});
 	}
 
 	// pin number - button
 	@FXML
-	void ButtonPinMethod() {
-		ButtonPin.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				int pin = Integer.parseInt(PinField.getText());
-				try {
-					ac.setPin(pin);
-					TextArea.appendText("\nEverything allright: "
-							+ PinField.getText());
-					PinField.setDisable(true);
-				} catch (WrongQuantityOfDigits e) {
-					TextArea.appendText("\nOnly 4 number are allowed");
-				}
-			}
-		});
-	}
-
-	// pin number field
-	@FXML
-	void PinFieldMethod() {
-		PinField.addEventFilter(KeyEvent.KEY_PRESSED,
-				new EventHandler<KeyEvent>() {
-
-					@Override
-					public void handle(KeyEvent event) {
-						if (event.getCode() == KeyCode.ENTER) {
-							int pin = Integer.parseInt(PinField.getText());
-							try {
-								ac.setPin(pin);
-								TextArea.appendText("\nEverything allright: "
-										+ PinField.getText());
-								PinField.setDisable(true);
-							} catch (WrongQuantityOfDigits e) {
-								TextArea.appendText("\nOnly 4 number are allowed");
-							}
-						}
-					}
-				});
+	void ButtonPinMethod(ActionEvent event) {
+		int pin = Integer.parseInt(PinField.getText());
+		try {
+			ac.setPin(pin);
+			TextArea.appendText("\nEverything allright: " + PinField.getText());
+			PinField.setDisable(true);
+		} catch (WrongQuantityOfDigits e) {
+			TextArea.appendText("\nOnly 4 number are allowed");
+		}
 	}
 
 	@FXML
-	void printAllAccounts() {
-		printButton.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				Iterator<Account> s = cm.iterator();
-				TextArea.appendText("\nUnsaved accounts will NOT be printed");
-				TextArea.appendText(" ");
-				while (s.hasNext()) {
-					TextArea.appendText("\n" + s.next());
-				}
-			}
-		});
+	void printAllAccounts(ActionEvent event) {
+		Iterator<Account> s = cm.iterator();
+		TextArea.appendText("\nUnsaved accounts will NOT be printed");
+		TextArea.appendText(" ");
+		while (s.hasNext()) {
+			TextArea.appendText("\n" + s.next());
+		}
 	}
 
 	@FXML
-	void Save() {
-		saveAccount.setOnAction(new EventHandler<ActionEvent>() {
+	void Save(ActionEvent event) {
+		final Stage window = new Stage();
+		int number = ac.getAccountNumber();
+		double deposit = ac.getBankDeposit();
+		double overdraft = ac.getOverdraft();
+		int pin = ac.getPin();
 
-			@Override
-			public void handle(ActionEvent arg0) {
-				final Stage window = new Stage();
-				int number = ac.getAccountNumber();
-				double deposit = ac.getBankDeposit();
-				double overdraft = ac.getOverdraft();
-				int pin = ac.getPin();
-
-				Account saveNewOne = new Account(number, overdraft, deposit,
-						pin);
-				cm.addNewAccount(saveNewOne);
-				TextArea.appendText("\nYou have saved new account");
-				window.hide();
-			}
-		});
+		Account saveNewOne = new Account(number, overdraft, deposit, pin);
+		cm.addNewAccount(saveNewOne);
+		TextArea.appendText("\nYou have saved new account");
+		window.hide();
 	}
 }

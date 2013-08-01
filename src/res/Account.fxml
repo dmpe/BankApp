@@ -9,14 +9,14 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="372.0" prefWidth="555.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.AccountController">
   <children>
-    <TextField id="AccountNumber" fx:id="AccountNumberField" layoutX="127.0" layoutY="75.0" onAction="#AccountNumberMethod" prefWidth="200.0" />
-    <TextField fx:id="OverdraftField" layoutX="127.0" layoutY="109.0" onAction="#OverdraftFieldMethod" prefWidth="197.0" />
-    <TextField fx:id="CashField" layoutX="127.0" layoutY="152.0" onAction="#CashFieldMethod" prefWidth="197.0" />
+    <TextField id="AccountNumber" fx:id="AccountNumberField" layoutX="127.0" layoutY="75.0" prefWidth="200.0" />
+    <TextField fx:id="OverdraftField" layoutX="129.0" layoutY="109.0" prefWidth="197.00009999999747" />
+    <TextField fx:id="CashField" layoutX="127.0" layoutY="153.0" prefWidth="200.0" />
     <Label id="AccountNumber" layoutX="20.0" layoutY="78.0" text="Account Number" underline="false" />
     <Label layoutX="20.0" layoutY="118.0" text="Overdraft" />
     <Label layoutX="20.0" layoutY="195.0" text="Pin (min. 4 numbers)" />
     <Label layoutX="20.0" layoutY="155.0" text="Cash" />
-    <PasswordField id="PinFiled" fx:id="PinField" layoutX="194.0" layoutY="189.0" onAction="#PinFieldMethod" prefWidth="130.0" />
+    <PasswordField id="PinFiled" fx:id="PinField" layoutX="194.0" layoutY="189.0" prefWidth="133.0" />
     <Button fx:id="ButtonAccountNumber" layoutX="343.0" layoutY="75.0" mnemonicParsing="false" onAction="#ButtonAccountNumberMethod" prefHeight="22.0" prefWidth="200.0" text="Send" />
     <Button fx:id="ButtonOverdraft" layoutX="343.0" layoutY="110.0" mnemonicParsing="false" onAction="#ButtonOverdraftMethod" prefWidth="200.0" text="Send" />
     <Button fx:id="ButtonCash" layoutX="343.0" layoutY="153.0" mnemonicParsing="false" onAction="#ButtonCashMethod" prefWidth="200.0" text="Send" />

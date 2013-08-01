@@ -1,7 +1,7 @@
 package logic;
 
 public class CashCard {
-	private int accountNumber;
+	protected int accountNumber;
 	
 	// Constructor
 	public CashCard() {

@@ -8,17 +8,15 @@ import exceptions.*;
 import javafx.collections.*;
 import javafx.event.*;
 import javafx.fxml.*;
-import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.input.*;
-import javafx.scene.layout.*;
 import javafx.stage.*;
 import logic.*;
 import jfxtras.labs.dialogs.*;
 import jfxtras.labs.dialogs.MonologFX.*;
 
 public class Controller {
+
+	Window owner;
 
 	@FXML
 	private ResourceBundle resources;
@@ -42,28 +40,13 @@ public class Controller {
 	private Menu MenuHelp;
 
 	@FXML
-	private Button acceptAccount;
-
-	@FXML
-	private Button acceptPin;
-
-	@FXML
-	private Button accountStatement;
-
-	@FXML
-	private Button removeCard;
-
-	@FXML
-	private Button withdraw;
-
-	@FXML
-	private ComboBox<Integer> chooseYourMoney;
+	private RadioButton choice;
 
 	@FXML
 	private RadioButton free;
 
 	@FXML
-	private RadioButton choice;
+	private ComboBox<Integer> chooseYourMoney;
 
 	@FXML
 	private TextArea infoText;
@@ -72,16 +55,25 @@ public class Controller {
 	private TextField moneyField;
 
 	@FXML
-	private TextField pinField;
-
-	@FXML
 	private TextField accountField;
 
 	@FXML
-	private AnchorPane accon;
+	private TextField pinField;
 
 	@FXML
-	private AccountController dialogController;
+	private Button removeCard;
+
+	@FXML
+	private Button acceptAccount;
+
+	@FXML
+	private Button accountStatement;
+
+	@FXML
+	private Button acceptPin;
+
+	@FXML
+	private Button withdraw;
 	/*
 	 * http://docs.oracle.com/javafx/2/api/javafx/scene/control/RadioButton.html
 	 * "Only one RadioButton can be selected when placed in a ToggleGroup.... A
@@ -137,142 +129,56 @@ public class Controller {
 		free.setToggleGroup(group);
 		choice.setToggleGroup(group);
 
-		acceptAccount();
-		acceptPin();
-		accountField();
-		accountStatement();
-		withdraw();
-		removeCard();
-		pinField();
-		About();
-		NewAccount();
-
 		infoText.appendText(maschine.getAllAccount());
 	}
 
 	@FXML
-	void acceptAccount() {
-		acceptAccount.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				try {
-					int karteNummer = Integer.parseInt(accountField.getText());
-					cashCard.setAccountNumber(karteNummer);
-					maschine.insertCashCard(cashCard);
-					infoText.appendText("\nYou have inserted a card in ATM");
-				} catch (CardInsertedException e) {
-					System.out.println(e.getMessage());
-				} catch (InvalidCardException e) {
-					infoText.appendText("\nWrong account number");
-				} catch (NumberFormatException e) {
-					infoText.appendText("\nYou can't do this");
-				}
-				accountField.setEditable(false);
-				accountStatement.setDisable(true);
-				event.consume();
-			}
-		});
+	void acceptAccount(ActionEvent event) {
+		try {
+			int cardNumber = Integer.parseInt(accountField.getText());
+			cashCard.setAccountNumber(cardNumber);
+			maschine.insertCashCard(cashCard);
+			infoText.appendText("\nYou have inserted a card in ATM - we dont know wheather right or wrong");
+		} catch (CardInsertedException e) {
+			System.out.println(e.getMessage());
+		} catch (InvalidCardException e) {
+			infoText.appendText("\nWrong account number");
+		} catch (NumberFormatException e) {
+			infoText.appendText("\nYou can't do this");
+			accountStatement.setDisable(true);
+			accountField.setEditable(true);
+		}
+		event.consume();
 	}
 
 	@FXML
-	void accountField() {
-		accountField.addEventFilter(KeyEvent.KEY_PRESSED,
-				new EventHandler<KeyEvent>() {
-
-					@Override
-					public void handle(KeyEvent event) {
-						if (event.getCode() == KeyCode.ENTER) {
-							try {
-								int karteNummer = Integer.parseInt(accountField
-										.getText());
-								cashCard.setAccountNumber(karteNummer);
-								maschine.insertCashCard(cashCard);
-								infoText.appendText("\nYou have inserted a card in ATM");
-							} catch (CardInsertedException e) {
-								System.out.println(e.getMessage());
-							} catch (InvalidCardException e) {
-								infoText.appendText("\nWrong account number");
-							} catch (NumberFormatException e) {
-								infoText.appendText("\nYou can't do this");
-							}
-							accountField.setEditable(false);
-							accountStatement.setDisable(true);
-						}
-						event.consume();
-					}
-				});
+	void accountStatement(ActionEvent event) {
+		infoText.appendText("\n" + maschine.accountStatementMethod());
+		moneyField.setDisable(false);
+		chooseYourMoney.setDisable(false);
+		event.consume();
 	}
 
 	@FXML
-	void accountStatement() {
-		accountStatement.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				infoText.appendText("\n" + maschine.accountStatementMethod());
-				moneyField.setDisable(false);
-				chooseYourMoney.setDisable(false);
-				event.consume();
-			}
-		});
-	}
-
-	@FXML
-	void acceptPin() {
-		acceptPin.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				try {
-					int pinNummer = Integer.parseInt(pinField.getText());
-					maschine.pinInsert(pinNummer);
-					infoText.appendText("\nYou habe inserted a pin number in ATM");
-				} catch (PinNotCorectException e) {
-					System.out.println(e.getMessage());
-				} catch (CardNotInsertedException e) {
-					System.out.println(e.getMessage());
-				} catch (InvalidCardException e) {
-					System.out.println(e.getMessage());
-				} catch (NumberFormatException e) {
-					infoText.appendText("\nYou can't do this");
-				}
-				pinField.setEditable(false);
-				accountStatement.setDisable(false);
-				// infoText.appendText("\n take your card out, then you can change the number again");
-				event.consume();
-			}
-		});
-	}
-
-	@FXML
-	void pinField() {
-		pinField.addEventFilter(KeyEvent.KEY_PRESSED,
-				new EventHandler<KeyEvent>() {
-
-					@Override
-					public void handle(KeyEvent event) {
-						if (event.getCode() == KeyCode.ENTER) {
-							try {
-								int pinNummer = Integer.parseInt(pinField
-										.getText());
-								maschine.pinInsert(pinNummer);
-								infoText.appendText("\nYou habe inserted a pin in ATM");
-							} catch (PinNotCorectException e) {
-								System.out.println(e.getMessage());
-							} catch (CardNotInsertedException e) {
-								System.out.println(e.getMessage());
-							} catch (InvalidCardException e) {
-								System.out.println(e.getMessage());
-							} catch (NumberFormatException e) {
-								infoText.appendText("\nYou can't do this");
-							}
-							pinField.setEditable(false);
-							accountStatement.setDisable(false);
-						}
-						event.consume();
-					}
-				});
+	void acceptPin(ActionEvent event) {
+		try {
+			int pinNummer = Integer.parseInt(pinField.getText());
+			maschine.pinInsert(pinNummer);
+			infoText.appendText("\nYou habe inserted a pin number in ATM");
+			accountStatement.setDisable(false);
+		} catch (PinNotCorectException e) {
+			System.out.println(e.getMessage());
+		} catch (CardNotInsertedException e) {
+			System.out.println(e.getMessage());
+		} catch (InvalidCardException e) {
+			System.out.println(e.getMessage());
+		} catch (NumberFormatException e) {
+			infoText.appendText("\nYou can't do this");
+			accountStatement.setDisable(true);
+			pinField.setEditable(true);
+		}
+		// infoText.appendText("\n take your card out, then you can change the number again");
+		event.consume();
 	}
 
 	/**
@@ -281,100 +187,79 @@ public class Controller {
 	 * and see this bug {@link} https://javafx-jira.kenai.com/browse/RT-31802
 	 */
 	@FXML
-	void removeCard() {
-		removeCard.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				try {
-					int zahl = accountField.getLength();
-					int zahl2 = pinField.getLength();
-					int zahl3 = infoText.getLength();
-					accountField.deleteText(0, zahl);
-					accountField.setEditable(true);
-					pinField.deleteText(0, zahl2);
-					pinField.setEditable(true);
-					infoText.deleteText(0, zahl3);
-					maschine.ejectCashCard();
-				} catch (CardNotInsertedException e) {
-					System.out.println(e.getMessage());
-				}
-				event.consume();
-			}
-		});
+	void removeCard(ActionEvent event) {
+		try {
+			int zahl = accountField.getLength();
+			int zahl2 = pinField.getLength();
+			int zahl3 = infoText.getLength();
+			accountField.deleteText(0, zahl);
+			accountField.setEditable(true);
+			accountStatement.setDisable(true);
+			pinField.deleteText(0, zahl2);
+			pinField.setEditable(true);
+			infoText.deleteText(0, zahl3);
+			maschine.ejectCashCard();
+		} catch (CardNotInsertedException e) {
+			System.out.println(e.getMessage());
+		}
+		event.consume();
 	}
 
 	@FXML
-	void withdraw() {
-		withdraw.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				try {
-					if (choice.isSelected()) {
-						maschine.withdraw(chooseYourMoney.getValue());
-						infoText.appendText("\n--New--");
-						infoText.appendText("\n"
-								+ maschine.accountStatementMethod());
-					} else if (free.isSelected()) {
-						double zahl2 = Double.parseDouble(moneyField.getText());
-						maschine.withdraw(zahl2);
-						infoText.appendText("\n--New--");
-						infoText.appendText("\n"
-								+ maschine.accountStatementMethod());
-					} else {
-						infoText.appendText("\nYou must choose the ammount to withdraw");
-					}
-				} catch (PinNotCorectException e) {
-					System.out.println(e.getMessage());
-				} catch (NotEnoughMoneyException e) {
-					System.out.println(e.getMessage());
-				} catch (NumberFormatException e) {
-					infoText.appendText("\nYou can't do this");
-				}
-				event.consume();
-			} // here end of the small method
-		});
-	}// here the end of the method
+	void withdraw(ActionEvent event) {
+		try {
+			if (choice.isSelected()) {
+				maschine.withdraw(chooseYourMoney.getValue());
+				infoText.appendText("\n" + "--New--");
+				infoText.appendText("\n" + maschine.accountStatementMethod());
+			} else if (free.isSelected()) {
+				double zahl2 = Double.parseDouble(moneyField.getText());
+				maschine.withdraw(zahl2);
+				infoText.appendText("\n" + "--New--");
+				infoText.appendText("\n" + maschine.accountStatementMethod());
+			} else {
+				infoText.appendText("\nYou must choose the ammount to withdraw");
+			}
+		} catch (PinNotCorectException e) {
+			System.out.println(e.getMessage());
+		} catch (NotEnoughMoneyException e) {
+			System.out.println(e.getMessage());
+		} catch (NumberFormatException e) {
+			infoText.appendText("\nYou can't do this");
+		}
+		event.consume();
+	} // here end of the small method
 
 	@FXML
-	void About() throws IOException {
-		About.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				// user must do sth. before click on this
-				// or he must click 2 times
-				MonologFX mf = new MonologFX(Type.INFO);
-				mf.setMessage("Created by @Malcjohn");
-				mf.setTitleText("About this app");
-				mf.showDialog();
-			}
-		});
-
+	void About(ActionEvent event) throws IOException {
+		// user must do sth. before click on this
+		// or he must click 2 times
+		MonologFX mf = new MonologFX(Type.INFO);
+		mf.setMessage("Created by @Malcjohn");
+		mf.setTitleText("About this app");
+		mf.showDialog();
 	}
 
 	@FXML
-	void NewAccount() {
-		NewAccount.setOnAction(new EventHandler<ActionEvent>() {
+	void NewAccount(ActionEvent event) {
 
-			@Override
-			public void handle(ActionEvent event) {
-				Parent root;
-				try {
-					root = FXMLLoader.load(getClass().getResource(
-							"/res/account.fxml"));
-					final Stage stage = new Stage();
-					Scene scene = new Scene(root);
-					stage.setTitle("Create new account");
-					stage.setScene(scene);
-					stage.getIcons().add(new Image("/res/account.png"));
-					stage.show();
-				} catch (IOException e) {
-					System.out.println("error");
-				}
-				event.consume();
-			}
-		});
+		Popup j = new Popup();
+		j.setAutoFix(true);
+		j.show(owner);
+
+		// Parent root23;
+		// try {
+		// root = FXMLLoader.load(getClass().getResource(
+		// "/res/account.fxml"));
+		// final Stage stage = new Stage();
+		// Scene scene = new Scene(root);
+		// stage.setTitle("Create new account");
+		// stage.setScene(scene);
+		// stage.getIcons().add(new Image("/res/account.png"));
+		// stage.show();
+		// } catch (IOException e) {
+		// System.out.println("error");
+		// }
+		event.consume();
 	}
 }
