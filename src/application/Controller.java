@@ -8,15 +8,15 @@ import exceptions.*;
 import javafx.collections.*;
 import javafx.event.*;
 import javafx.fxml.*;
+import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.stage.*;
 import logic.*;
 import jfxtras.labs.dialogs.*;
 import jfxtras.labs.dialogs.MonologFX.*;
 
 public class Controller {
-
-	Window owner;
 
 	@FXML
 	private ResourceBundle resources;
@@ -99,6 +99,7 @@ public class Controller {
 	 */
 	CashMachine<Account> maschine = new CashMachine<Account>();
 	CashCard cashCard = new CashCard();
+	Stage primaryStage;
 
 	@FXML
 	void initialize() throws Exception {
@@ -129,7 +130,7 @@ public class Controller {
 		free.setToggleGroup(group);
 		choice.setToggleGroup(group);
 
-		infoText.appendText(maschine.getAllAccount());
+		infoText.appendText("\nPlease, insert you card in ATM");
 	}
 
 	@FXML
@@ -167,7 +168,7 @@ public class Controller {
 			infoText.appendText("\nYou habe inserted a pin number in ATM");
 			accountStatement.setDisable(false);
 		} catch (PinNotCorectException e) {
-			System.out.println(e.getMessage());
+			infoText.appendText("\nPin wrong, correct it! ");
 		} catch (CardNotInsertedException e) {
 			System.out.println(e.getMessage());
 		} catch (InvalidCardException e) {
@@ -199,6 +200,7 @@ public class Controller {
 			pinField.setEditable(true);
 			infoText.deleteText(0, zahl3);
 			maschine.ejectCashCard();
+			infoText.appendText("Insert your card number ");
 		} catch (CardNotInsertedException e) {
 			System.out.println(e.getMessage());
 		}
@@ -232,10 +234,9 @@ public class Controller {
 
 	@FXML
 	void About(ActionEvent event) throws IOException {
-		// user must do sth. before click on this
-		// or he must click 2 times
 		MonologFX mf = new MonologFX(Type.INFO);
-		mf.setMessage("Created by @Malcjohn");
+		mf.setMessage("Created by @Malcjohn  - cincenko@outlook.com" + "\n"
+				+ "https://github.com/Johnmalc/BankApp/");
 		mf.setTitleText("About this app");
 		mf.showDialog();
 	}
@@ -243,23 +244,27 @@ public class Controller {
 	@FXML
 	void NewAccount(ActionEvent event) {
 
-		Popup j = new Popup();
-		j.setAutoFix(true);
-		j.show(owner);
+		try {
+			// Load the fxml file and create a new stage for the popup
+			FXMLLoader loader = new FXMLLoader(
+					Main.class.getResource("/res/account.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Edit Account");
+			// dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
 
-		// Parent root23;
-		// try {
-		// root = FXMLLoader.load(getClass().getResource(
-		// "/res/account.fxml"));
-		// final Stage stage = new Stage();
-		// Scene scene = new Scene(root);
-		// stage.setTitle("Create new account");
-		// stage.setScene(scene);
-		// stage.getIcons().add(new Image("/res/account.png"));
-		// stage.show();
-		// } catch (IOException e) {
-		// System.out.println("error");
-		// }
+			// Set the person into the controller
+			AccountController controller = loader.getController();
+			controller.setNewAccount(dialogStage);
+
+			// Show the dialog and wait until the user closes it
+			dialogStage.show();
+		} catch (Exception s) {
+
+		}
 		event.consume();
 	}
 }

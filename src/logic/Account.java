@@ -17,7 +17,8 @@ public class Account {
 	 * @param pin
 	 */
 
-	public Account(int accountNumber, double overdraft, double bankDeposit, int pin) {
+	public Account(int accountNumber, double overdraft, double bankDeposit,
+			int pin) {
 		this.accountNumber = accountNumber;
 		this.overdraft = overdraft;
 		this.bankDeposit = bankDeposit;
@@ -88,8 +89,7 @@ public class Account {
 	/**
 	 * Taken from:
 	 * http://stackoverflow.com/questions/1306727/way-to-get-number-of
-	 * -digits-in-an-int After teachers recommendation I have added an (another)
-	 * Exception. He will like it !!!
+	 * -digits-in-an-int
 	 * 
 	 * @param value4
 	 *            PIN

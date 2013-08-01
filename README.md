@@ -41,9 +41,6 @@ Here [http://www.komentovaneudalosti.cz/blog/?p=1126](http://www.komentovaneudal
 
 - to add some close button > delete menu label and correct the print all accounts button
 - PROBLEM: kdyz zadam neco jineho nez 23456789 tak to sice vypise informace o nem, ale bug > ja chci jiny
-- completelly changed the methods to be really done with fxml
-- deleted enter methods
--  
 - https://forums.oracle.com/thread/2543153
 - http://code.metager.de/source/xref/netbeans/javafx2.samples/FXML-LoginDemo/src/demo/Main.java
 - http://docs.oracle.com/javafx/2/api/index.html?javafx/stage/Window.html
@@ -51,3 +48,6 @@ Here [http://www.komentovaneudalosti.cz/blog/?p=1126](http://www.komentovaneudal
 - https://gist.github.com/jewelsea/1887631
 - http://stackoverflow.com/questions/10486731/how-to-create-a-modal-window-in-javafx-2-1
 - http://java-buddy.blogspot.cz/2012/12/open-new-window-in-javafx-2.html
+
+
+- http://edu.makery.ch/blog/2012/11/27/javafx-tutorial-addressapp-5/

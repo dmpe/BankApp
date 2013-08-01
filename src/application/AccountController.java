@@ -55,6 +55,8 @@ public class AccountController {
 	@FXML
 	private HBox hbox;
 
+	Stage dialogStage;
+
 	/*
 	 * Object Account for inserting all the stuff there
 	 */
@@ -74,6 +76,17 @@ public class AccountController {
 		assert TextArea != null : "fx:id=\"TextArea\" was not injected: check your FXML file 'Account.fxml'.";
 		assert printButton != null : "fx:id=\"printButton\" was not injected: check your FXML file 'account.fxml'.";
 		assert hbox != null : "fx:id=\"hbox\" was not injected: check your FXML file 'account.fxml'.";
+
+	}
+
+	// account money button
+	@FXML
+	void ButtonAccountNumberMethod(ActionEvent event) {
+		int AccountNumber = Integer.parseInt(AccountNumberField.getText());
+		ac.setAccountNumber(AccountNumber);
+		TextArea.appendText("\nEverything allright: "
+				+ AccountNumberField.getText());
+		AccountNumberField.setDisable(true);
 
 	}
 
@@ -123,7 +136,6 @@ public class AccountController {
 
 	@FXML
 	void Save(ActionEvent event) {
-		final Stage window = new Stage();
 		int number = ac.getAccountNumber();
 		double deposit = ac.getBankDeposit();
 		double overdraft = ac.getOverdraft();
@@ -132,6 +144,10 @@ public class AccountController {
 		Account saveNewOne = new Account(number, overdraft, deposit, pin);
 		cm.addNewAccount(saveNewOne);
 		TextArea.appendText("\nYou have saved new account");
-		window.hide();
+		dialogStage.close();
+	}
+
+	public void setNewAccount(Stage dialogStage) {
+		this.dialogStage = dialogStage;
 	}
 }

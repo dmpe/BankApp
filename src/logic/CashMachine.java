@@ -25,11 +25,6 @@ public class CashMachine<K> implements Iterable<Account> {
 		accounts.add(a1);
 		accounts.add(a2);
 		accounts.add(a3);
-
-		System.out.println(accounts.get(0));
-		System.out.println(accounts.get(1));
-		System.out.println(accounts.get(2));
-
 	}
 
 	/**
@@ -93,7 +88,7 @@ public class CashMachine<K> implements Iterable<Account> {
 			break;
 		default:
 			throw new CardNotInsertedException();
-		} // end switch
+		}
 	}
 
 	/**
@@ -111,13 +106,12 @@ public class CashMachine<K> implements Iterable<Account> {
 			NotEnoughMoneyException {
 		switch (state) {
 		case PIN_CORRECT:
-			System.out.println("Ihr Kontoguthaben ist: " + ac.getBankDeposit()
-					+ " Euro.");
+			System.out.println("Your deposit before any action was: "
+					+ ac.getBankDeposit() + " Euro.");
 			if (ac.getBankDeposit() - amount >= ac.getOverdraft()) {
 				ac.setBankDeposit(ac.getBankDeposit() - amount);
-				System.out.println("Sie haben erfolgreich " + amount
-						+ " Euro abgehoben.");
-				System.out.println("Ihr Kontoguthaben ist: "
+				System.out.println("You have withdrew " + amount + " Euro.");
+				System.out.println("Your new deposit is: "
 						+ ac.getBankDeposit() + " Euro.");
 			} else {
 				throw new NotEnoughMoneyException();
@@ -173,8 +167,8 @@ public class CashMachine<K> implements Iterable<Account> {
 		if (state == State.CARD_INSERTED || state == State.PIN_CORRECT) {
 			cashCard = null;
 			state = State.READY;
-			System.out.println("Ihr Karte ist entfernt!");
-			System.out.println("Automat ist auf Status " + state + " gesetzt.");
+			System.out.println("The card & account is out of the ATM");
+			System.out.println("ATM is set on " + state);
 		} else {
 			throw new CardNotInsertedException();
 		}
