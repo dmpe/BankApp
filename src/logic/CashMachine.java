@@ -13,7 +13,6 @@ public class CashMachine<K> implements Iterable<Account> {
 	Account ac;
 	CashCard cashCard;
 	State state;
-	boolean co;
 
 	public CashMachine() {
 		state = State.READY;
@@ -82,7 +81,7 @@ public class CashMachine<K> implements Iterable<Account> {
 					System.out.println("ATM was set on status : " + state);
 				} else {
 					throw new PinNotCorectException();
-				} // end of if-else
+				}
 			} else {
 				throw new InvalidCardException();
 			}
@@ -120,7 +119,7 @@ public class CashMachine<K> implements Iterable<Account> {
 			break;
 		default:
 			throw new PinNotCorectException();
-		} // switch State Ende
+		}
 	}
 
 	/**
@@ -161,6 +160,8 @@ public class CashMachine<K> implements Iterable<Account> {
 	 * Methode ejectCashCard() kann auch im Zustand PIN_CORRECT ausgefuhrt
 	 * werden.
 	 * 
+	 * Reset of app
+	 * 
 	 * @throws CardNotInsertedException
 	 * 
 	 */
@@ -194,7 +195,6 @@ public class CashMachine<K> implements Iterable<Account> {
 		accounts.add(no);
 		System.out.println("account size : " + accounts.size());
 		System.out.println("\n");
-		System.out.println(getAllAccount());
 	}
 
 	/**
@@ -202,7 +202,8 @@ public class CashMachine<K> implements Iterable<Account> {
 	 * @return all accounts
 	 */
 	public String getAllAccount() {
-		return accounts.toString();
+		System.out.println(accounts.toString());
+		return null;
 	}
 
 }

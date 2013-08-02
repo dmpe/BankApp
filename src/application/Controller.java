@@ -10,70 +10,71 @@ import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
-import logic.*;
 import jfxtras.labs.dialogs.*;
 import jfxtras.labs.dialogs.MonologFX.*;
+import logic.*;
 
 public class Controller {
 
 	@FXML
-	private ResourceBundle resources;
+	public ResourceBundle resources;
 
 	@FXML
-	private URL location;
+	public URL location;
 
 	@FXML
-	private MenuItem About;
+	public MenuItem About;
 
 	@FXML
-	private MenuItem NewAccount;
+	public MenuItem NewAccount;
 
 	@FXML
-	private MenuBar MenuBar;
+	public MenuBar MenuBar;
 
 	@FXML
-	private Menu MenuFile;
+	public Menu MenuFile;
 
 	@FXML
-	private Menu MenuHelp;
+	public Menu MenuHelp;
 
 	@FXML
-	private RadioButton choice;
+	public RadioButton choice;
 
 	@FXML
-	private RadioButton free;
+	public RadioButton free;
 
 	@FXML
-	private ComboBox<Integer> chooseYourMoney;
+	public ComboBox<Integer> chooseYourMoney;
 
 	@FXML
-	private TextArea infoText;
+	public TextArea infoText;
 
 	@FXML
 	public TextField moneyField;
 
 	@FXML
-	private TextField accountField;
+	public TextField accountField;
 
 	@FXML
-	private TextField pinField;
+	public TextField pinField;
 
 	@FXML
-	private Button removeCard;
+	public Button removeCard;
 
 	@FXML
-	private Button acceptAccount;
+	public Button acceptAccount;
 
 	@FXML
-	private Button accountStatement;
+	public Button accountStatement;
 
 	@FXML
-	private Button acceptPin;
+	public Button acceptPin;
 
 	@FXML
-	private Button withdraw;
+	public Button withdraw;
 	/*
 	 * http://docs.oracle.com/javafx/2/api/javafx/scene/control/RadioButton.html
 	 * "Only one RadioButton can be selected when placed in a ToggleGroup.... A
@@ -136,6 +137,8 @@ public class Controller {
 	@FXML
 	void acceptAccount(ActionEvent event) {
 		try {
+			System.out.println(maschine.getAllAccount());
+
 			int cardNumber = Integer.parseInt(accountField.getText());
 			cashCard.setAccountNumber(cardNumber);
 			maschine.insertCashCard(cashCard);
@@ -240,33 +243,41 @@ public class Controller {
 		mf.setMessage("Created by @Malcjohn  - cincenko@outlook.com" + "\n"
 				+ "https://github.com/Johnmalc/BankApp/");
 		mf.setTitleText("About this app");
+		mf.centerOnScreen();
 		mf.showDialog();
 	}
 
+	/**
+	 * taken from here
+	 * http://edu.makery.ch/blog/2012/11/27/javafx-tutorial-addressapp-5/
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
-	void NewAccount(ActionEvent event) {
+	void NewAccount(ActionEvent event) throws IOException {
 
-		try {
-			// Load the fxml file and create a new stage for the popup
-			FXMLLoader loader = new FXMLLoader(
-					Main.class.getResource("/res/account.fxml"));
-			AnchorPane page = (AnchorPane) loader.load();
-			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Edit Account");
-			// dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.initOwner(primaryStage);
-			Scene scene = new Scene(page);
-			dialogStage.setScene(scene);
+		// Load the fxml file and create a new stage for the popup
+		FXMLLoader loader = new FXMLLoader(
+				Main.class.getResource("/res/account.fxml"));
+		AnchorPane page = (AnchorPane) loader.load();
+		Stage dialogStage = new Stage();
+		dialogStage.getIcons().add(new Image("/res/account.png"));
+		dialogStage.setTitle("Edit Account");
+		// dialogStage.initModality(Modality.WINDOW_MODAL);
+		dialogStage.initOwner(primaryStage);
+		Scene scene = new Scene(page);
+		dialogStage.setScene(scene);
 
-			// Set the person into the controller
-			AccountController controller = loader.getController();
-			controller.setNewAccount(dialogStage);
+		// Set the person into the controller
+		AccountController controller = loader.getController();
+		controller.setNewAccount(dialogStage);
 
-			// Show the dialog and wait until the user closes it
-			dialogStage.show();
-		} catch (Exception s) {
-
-		}
-		event.consume();
+		dialogStage.show();
 	}
+
+	public String sets() {
+		return maschine.getAllAccount();
+	}
+
 }

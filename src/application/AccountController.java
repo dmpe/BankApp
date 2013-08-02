@@ -20,16 +20,7 @@ public class AccountController {
 	private URL location;
 
 	@FXML
-	private Button ButtonAccountNumber;
-
-	@FXML
-	private Button ButtonCash;
-
-	@FXML
-	private Button ButtonOverdraft;
-
-	@FXML
-	private Button ButtonPin;
+	private Button saveButton;
 
 	@FXML
 	private Button printButton;
@@ -60,94 +51,94 @@ public class AccountController {
 	/*
 	 * Object Account for inserting all the stuff there
 	 */
-	Account ac = new Account();
-	CashMachine<Account> cm = new CashMachine<Account>();
+	 Account ac = new Account();
+	 CashMachine<Account> maschine = new CashMachine<Account>();
+	 Controller st = new Controller();
 
 	@FXML
 	void initialize() {
-		assert AccountNumberField != null : "fx:id=\"AccountNumberField\" was not injected: check your FXML file 'Account.fxml'.";
-		assert ButtonAccountNumber != null : "fx:id=\"ButtonAccountNumber\" was not injected: check your FXML file 'Account.fxml'.";
-		assert ButtonCash != null : "fx:id=\"ButtonCash\" was not injected: check your FXML file 'Account.fxml'.";
-		assert ButtonOverdraft != null : "fx:id=\"ButtonOverdraft\" was not injected: check your FXML file 'Account.fxml'.";
-		assert ButtonPin != null : "fx:id=\"ButtonPin\" was not injected: check your FXML file 'Account.fxml'.";
-		assert CashField != null : "fx:id=\"CashField\" was not injected: check your FXML file 'Account.fxml'.";
-		assert OverdraftField != null : "fx:id=\"OverdraftField\" was not injected: check your FXML file 'Account.fxml'.";
-		assert PinField != null : "fx:id=\"PinField\" was not injected: check your FXML file 'Account.fxml'.";
-		assert TextArea != null : "fx:id=\"TextArea\" was not injected: check your FXML file 'Account.fxml'.";
-		assert printButton != null : "fx:id=\"printButton\" was not injected: check your FXML file 'account.fxml'.";
+		assert AccountNumberField != null : "fx:id=\"AccountNumberField\" was not injected: check your FXML file 'account.fxml'.";
+		assert CashField != null : "fx:id=\"CashField\" was not injected: check your FXML file 'account.fxml'.";
+		assert OverdraftField != null : "fx:id=\"OverdraftField\" was not injected: check your FXML file 'account.fxml'.";
+		assert PinField != null : "fx:id=\"PinField\" was not injected: check your FXML file 'account.fxml'.";
+		assert TextArea != null : "fx:id=\"TextArea\" was not injected: check your FXML file 'account.fxml'.";
 		assert hbox != null : "fx:id=\"hbox\" was not injected: check your FXML file 'account.fxml'.";
+		assert printButton != null : "fx:id=\"printButton\" was not injected: check your FXML file 'account.fxml'.";
+		assert saveAccount != null : "fx:id=\"saveAccount\" was not injected: check your FXML file 'account.fxml'.";
+		assert saveButton != null : "fx:id=\"saveButton\" was not injected: check your FXML file 'account.fxml'.";
 
 	}
 
-	// account money button
+	public void setNewAccount(Stage dialogStage) {
+		this.dialogStage = dialogStage;
+	}
+
 	@FXML
-	void ButtonAccountNumberMethod(ActionEvent event) {
+	void saveEverything(ActionEvent event) {
 		int AccountNumber = Integer.parseInt(AccountNumberField.getText());
 		ac.setAccountNumber(AccountNumber);
-		TextArea.appendText("\nEverything allright: "
-				+ AccountNumberField.getText());
-		AccountNumberField.setDisable(true);
 
-	}
-
-	// cash money - button
-	@FXML
-	void ButtonCashMethod(ActionEvent event) {
-		double zahl = Double.parseDouble(CashField.getText());
-		ac.setBankDeposit(zahl);
-		TextArea.appendText("\nEverything allright: " + CashField.getText());
-		CashField.setDisable(true);
-
-	}
-
-	// overdraft money - button
-	@FXML
-	void ButtonOverdraftMethod(ActionEvent event) {
-		double overdraft = Double.parseDouble(OverdraftField.getText());
-		ac.setOverdraft(overdraft);
-		TextArea.appendText("\nEverything allright: "
-				+ OverdraftField.getText());
-		OverdraftField.setDisable(true);
-
-	}
-
-	// pin number - button
-	@FXML
-	void ButtonPinMethod(ActionEvent event) {
 		int pin = Integer.parseInt(PinField.getText());
 		try {
 			ac.setPin(pin);
-			TextArea.appendText("\nEverything allright: " + PinField.getText());
-			PinField.setDisable(true);
 		} catch (WrongQuantityOfDigits e) {
 			TextArea.appendText("\nOnly 4 number are allowed");
 		}
+
+		double cash = Double.parseDouble(CashField.getText());
+		ac.setBankDeposit(cash);
+
+		double overdraft = Double.parseDouble(OverdraftField.getText());
+		ac.setOverdraft(overdraft);
+
+		TextArea.appendText("\nEverything allright: "
+				+ AccountNumberField.getText());
+		TextArea.appendText("\nEverything allright: " + CashField.getText());
+		TextArea.appendText("\nEverything allright: "
+				+ OverdraftField.getText());
+		TextArea.appendText("\nEverything allright: " + PinField.getText());
+
 	}
 
 	@FXML
 	void printAllAccounts(ActionEvent event) {
-		Iterator<Account> s = cm.iterator();
+		Iterator<Account> s = maschine.iterator();
 		TextArea.appendText("\nUnsaved accounts will NOT be printed");
-		TextArea.appendText(" ");
 		while (s.hasNext()) {
 			TextArea.appendText("\n" + s.next());
 		}
+		System.out.println(" ");
+		st.sets();
 	}
 
+	/**
+	 * https://github.com/stevenschwenke/SimFX/blob/master/src/main/java/de/
+	 * stevenschwenke/java/javafx/simFX/ui/javaFX/JavaFxApplication.java#L295
+	 */
 	@FXML
 	void Save(ActionEvent event) {
 		int number = ac.getAccountNumber();
 		double deposit = ac.getBankDeposit();
 		double overdraft = ac.getOverdraft();
 		int pin = ac.getPin();
+		// st.sets();
 
 		Account saveNewOne = new Account(number, overdraft, deposit, pin);
-		cm.addNewAccount(saveNewOne);
+		maschine.addNewAccount(saveNewOne);
 		TextArea.appendText("\nYou have saved new account");
-		dialogStage.close();
-	}
 
-	public void setNewAccount(Stage dialogStage) {
-		this.dialogStage = dialogStage;
+		// TimerTask closeIt = new TimerTask() {
+		// @Override
+		// public void run() {
+		// Platform.runLater(new Runnable() {
+		// @Override
+		// public void run() {
+		// dialogStage.close();
+		// }
+		// });
+		// }
+		// };
+		// new Timer().schedule(closeIt, 1500);
+
 	}
 }

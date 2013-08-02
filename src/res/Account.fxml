@@ -9,27 +9,24 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="372.0" prefWidth="555.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.AccountController">
   <children>
-    <TextField id="AccountNumber" fx:id="AccountNumberField" layoutX="127.0" layoutY="75.0" prefWidth="200.0" />
-    <TextField fx:id="OverdraftField" layoutX="129.0" layoutY="109.0" prefWidth="197.00009999999747" />
-    <TextField fx:id="CashField" layoutX="127.0" layoutY="153.0" prefWidth="200.0" />
+    <TextField id="AccountNumber" fx:id="AccountNumberField" layoutX="129.0" layoutY="75.0" prefWidth="198.0" />
+    <TextField fx:id="OverdraftField" layoutX="129.0" layoutY="109.0" prefWidth="198.0001220703125" />
+    <TextField fx:id="CashField" layoutX="129.0" layoutY="153.0" prefWidth="198.0" />
     <Label id="AccountNumber" layoutX="20.0" layoutY="78.0" text="Account Number" underline="false" />
     <Label layoutX="20.0" layoutY="118.0" text="Overdraft" />
     <Label layoutX="20.0" layoutY="195.0" text="Pin (min. 4 numbers)" />
     <Label layoutX="20.0" layoutY="155.0" text="Cash" />
     <PasswordField id="PinFiled" fx:id="PinField" layoutX="194.0" layoutY="189.0" prefWidth="133.0" />
-    <Button fx:id="ButtonAccountNumber" layoutX="343.0" layoutY="75.0" mnemonicParsing="false" onAction="#ButtonAccountNumberMethod" prefHeight="22.0" prefWidth="200.0" text="Send" />
-    <Button fx:id="ButtonOverdraft" layoutX="343.0" layoutY="110.0" mnemonicParsing="false" onAction="#ButtonOverdraftMethod" prefWidth="200.0" text="Send" />
-    <Button fx:id="ButtonCash" layoutX="343.0" layoutY="153.0" mnemonicParsing="false" onAction="#ButtonCashMethod" prefWidth="200.0" text="Send" />
-    <Button fx:id="ButtonPin" layoutX="343.0" layoutY="189.0" mnemonicParsing="false" onAction="#ButtonPinMethod" prefWidth="200.0" text="Send" />
     <TextArea fx:id="TextArea" editable="false" layoutX="19.0" layoutY="238.0" prefHeight="127.0" prefWidth="523.0" wrapText="false" />
     <HBox fx:id="hbox" alignment="CENTER" fillHeight="true" layoutX="14.0" layoutY="11.0" prefHeight="51.0" prefWidth="542.0" spacing="60.0">
       <children>
         <Button fx:id="printButton" mnemonicParsing="false" onAction="#printAllAccounts" prefHeight="37.0" prefWidth="157.0" text="Print all accounts" />
-        <Button fx:id="saveAccount" mnemonicParsing="false" onAction="#Save" prefHeight="37.0" prefWidth="157.0" text="Save new account" />
+        <Button fx:id="saveAccount" mnemonicParsing="false" onAction="#Save" prefHeight="37.0" prefWidth="286.0" text="Save new account and close it automatically" />
       </children>
       <padding>
         <Insets />
       </padding>
     </HBox>
+    <Button fx:id="saveButton" layoutX="350.0" layoutY="75.0" mnemonicParsing="false" onAction="#saveEverything" prefHeight="136.0" prefWidth="187.00009999999747" text="Save all numbers. Do it as #1 activity." textAlignment="CENTER" wrapText="true" />
   </children>
 </AnchorPane>
