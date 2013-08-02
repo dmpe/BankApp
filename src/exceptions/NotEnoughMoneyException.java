@@ -4,7 +4,7 @@ public class NotEnoughMoneyException extends Exception {
 
 	public NotEnoughMoneyException() {
 		System.out.println("");
-		System.out.println("Sie haben nicht genug Geld zum abheben");
+		System.out.println("To few money. You can't withdraw");
 
 	}
 

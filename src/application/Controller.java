@@ -52,7 +52,7 @@ public class Controller {
 	private TextArea infoText;
 
 	@FXML
-	private TextField moneyField;
+	public TextField moneyField;
 
 	@FXML
 	private TextField accountField;
@@ -139,13 +139,13 @@ public class Controller {
 			int cardNumber = Integer.parseInt(accountField.getText());
 			cashCard.setAccountNumber(cardNumber);
 			maschine.insertCashCard(cashCard);
-			infoText.appendText("\nYou have inserted a card in ATM - we dont know wheather right or wrong");
+			infoText.appendText("\nYou have inserted a card in ATM - we dont know whether right or wrong");
 		} catch (CardInsertedException e) {
-			System.out.println(e.getMessage());
+			infoText.appendText(e.getMessage());
 		} catch (InvalidCardException e) {
-			infoText.appendText("\nWrong account number");
+			infoText.appendText(e.getMessage());
 		} catch (NumberFormatException e) {
-			infoText.appendText("\nYou can't do this");
+			infoText.appendText("\nOnly numbers are permitted");
 			accountStatement.setDisable(true);
 			accountField.setEditable(true);
 		}
@@ -167,18 +167,18 @@ public class Controller {
 			maschine.pinInsert(pinNummer);
 			infoText.appendText("\nYou habe inserted a pin number in ATM");
 			accountStatement.setDisable(false);
+			infoText.appendText("\nPin seems to be correct");
 		} catch (PinNotCorectException e) {
 			infoText.appendText("\nPin wrong, correct it! ");
 		} catch (CardNotInsertedException e) {
-			System.out.println(e.getMessage());
+			infoText.appendText(e.getMessage());
 		} catch (InvalidCardException e) {
-			System.out.println(e.getMessage());
+			infoText.appendText("\nThis card number doesn't exist in our database");
 		} catch (NumberFormatException e) {
-			infoText.appendText("\nYou can't do this");
+			infoText.appendText("\nOnly numbers are permitted");
 			accountStatement.setDisable(true);
 			pinField.setEditable(true);
 		}
-		// infoText.appendText("\n take your card out, then you can change the number again");
 		event.consume();
 	}
 
@@ -193,6 +193,7 @@ public class Controller {
 			int zahl = accountField.getLength();
 			int zahl2 = pinField.getLength();
 			int zahl3 = infoText.getLength();
+			int zahl4 = moneyField.getLength();
 			accountField.deleteText(0, zahl);
 			accountField.setEditable(true);
 			accountStatement.setDisable(true);
@@ -200,6 +201,7 @@ public class Controller {
 			pinField.setEditable(true);
 			infoText.deleteText(0, zahl3);
 			maschine.ejectCashCard();
+			moneyField.deleteText(0, zahl4);
 			infoText.appendText("Insert your card number ");
 		} catch (CardNotInsertedException e) {
 			System.out.println(e.getMessage());
@@ -223,9 +225,9 @@ public class Controller {
 				infoText.appendText("\nYou must choose the ammount to withdraw");
 			}
 		} catch (PinNotCorectException e) {
-			System.out.println(e.getMessage());
+			infoText.appendText(e.getMessage());
 		} catch (NotEnoughMoneyException e) {
-			System.out.println(e.getMessage());
+			infoText.appendText(e.getMessage());
 		} catch (NumberFormatException e) {
 			infoText.appendText("\nYou can't do this");
 		}

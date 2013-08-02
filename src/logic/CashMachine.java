@@ -1,7 +1,6 @@
 package logic;
 
 import java.util.*;
-
 import exceptions.*;
 
 public class CashMachine<K> implements Iterable<Account> {
@@ -14,6 +13,7 @@ public class CashMachine<K> implements Iterable<Account> {
 	Account ac;
 	CashCard cashCard;
 	State state;
+	boolean co;
 
 	public CashMachine() {
 		state = State.READY;
@@ -35,24 +35,22 @@ public class CashMachine<K> implements Iterable<Account> {
 	 * Automaten soll auf der Konsole protokolliert werden.
 	 * 
 	 * @param cashCardX
-	 * @throws InvalidCardException
 	 * @throws CardInsertedException
+	 * @throws InvalidCardException
 	 */
 	public void insertCashCard(CashCard cashCardX)
 			throws CardInsertedException, InvalidCardException {
 		switch (state) {
 		case READY:
-			cashCard = cashCardX;
-			/*
-			 * Sucht die passende Konto nach AccountNummer
-			 */
+			this.cashCard = cashCardX;
+			state = State.CARD_INSERTED;
+
 			for (Account acc : accounts) {
-				if ((acc.getAccountNumber()) == (cashCard.getAccountNumber())) {
+				if (acc.getAccountNumber() == cashCard.getAccountNumber()) {
 					this.ac = acc;
-					state = State.CARD_INSERTED;
-					break;
 				}
 			}
+
 			break;
 		default:
 			throw new CardInsertedException();
@@ -77,14 +75,17 @@ public class CashMachine<K> implements Iterable<Account> {
 			CardNotInsertedException, InvalidCardException {
 		switch (state) {
 		case CARD_INSERTED:
-			if (ac.getPin() == pinX) {
-				state = State.PIN_CORRECT;
-				System.out.println("Sie haben den richtigen Pin eingegeben.");
-				System.out.println("Automat ist auf Status " + state
-						+ " gesetzt.");
+			if ((ac.getAccountNumber()) == (cashCard.getAccountNumber())) {
+				if (ac.getPin() == pinX) {
+					state = State.PIN_CORRECT;
+					System.out.println("Your pin is correct");
+					System.out.println("ATM was set on status : " + state);
+				} else {
+					throw new PinNotCorectException();
+				} // end of if-else
 			} else {
-				throw new PinNotCorectException();
-			} // end of if-else
+				throw new InvalidCardException();
+			}
 			break;
 		default:
 			throw new CardNotInsertedException();
@@ -166,9 +167,10 @@ public class CashMachine<K> implements Iterable<Account> {
 	public void ejectCashCard() throws CardNotInsertedException {
 		if (state == State.CARD_INSERTED || state == State.PIN_CORRECT) {
 			cashCard = null;
+			ac = null;
 			state = State.READY;
-			System.out.println("The card & account is out of the ATM");
-			System.out.println("ATM is set on " + state);
+			System.out.println("\nThe card & account is out of the ATM");
+			System.out.println("\nATM is set on " + state);
 		} else {
 			throw new CardNotInsertedException();
 		}
