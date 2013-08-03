@@ -43,5 +43,6 @@
     </ComboBox>
     <RadioButton id="Free" fx:id="free" layoutX="228.0" layoutY="179.0" mnemonicParsing="false" text="Free" />
     <Button fx:id="accountStatement" layoutX="220.0" layoutY="127.0" mnemonicParsing="false" onAction="#accountStatement" prefHeight="35.0" prefWidth="160.0" text="Account Statement" />
+    <Button fx:id="print" layoutX="23.0" layoutY="208.0" mnemonicParsing="false" onAction="#printAll" text="Button" />
   </children>
 </AnchorPane>

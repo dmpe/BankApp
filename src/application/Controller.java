@@ -75,6 +75,9 @@ public class Controller {
 
 	@FXML
 	public Button withdraw;
+
+	@FXML
+	private Button print;
 	/*
 	 * http://docs.oracle.com/javafx/2/api/javafx/scene/control/RadioButton.html
 	 * "Only one RadioButton can be selected when placed in a ToggleGroup.... A
@@ -98,9 +101,11 @@ public class Controller {
 	/*
 	 * Object from CashMachine & CashCard
 	 */
-	CashMachine<Account> maschine = new CashMachine<Account>();
 	CashCard cashCard = new CashCard();
+	LinkedList<Account> accounts;
+	CashMachine<Account> maschine = new CashMachine<Account>();
 	Stage primaryStage;
+	Main main;
 
 	@FXML
 	void initialize() throws Exception {
@@ -121,6 +126,7 @@ public class Controller {
 		assert pinField != null : "fx:id=\"pinField\" was not injected: check your FXML file 'default.fxml'.";
 		assert removeCard != null : "fx:id=\"removeCard\" was not injected: check your FXML file 'default.fxml'.";
 		assert withdraw != null : "fx:id=\"withdraw\" was not injected: check your FXML file 'default.fxml'.";
+		assert print != null : "fx:id=\"withdraw\" was not injected: check your FXML file 'default.fxml'.";
 
 		chooseYourMoney.setItems(items2);
 
@@ -132,12 +138,17 @@ public class Controller {
 		choice.setToggleGroup(group);
 
 		infoText.appendText("\nPlease, insert you card in ATM");
+
+		this.accounts = CashMachine.getone();
+	}
+
+	public void setMainApp(Main mainApp) {
+		this.main = mainApp;
 	}
 
 	@FXML
 	void acceptAccount(ActionEvent event) {
 		try {
-			System.out.println(maschine.getAllAccount());
 
 			int cardNumber = Integer.parseInt(accountField.getText());
 			cashCard.setAccountNumber(cardNumber);
@@ -258,15 +269,20 @@ public class Controller {
 	void NewAccount(ActionEvent event) throws IOException {
 
 		// Load the fxml file and create a new stage for the popup
-		FXMLLoader loader = new FXMLLoader(
-				Main.class.getResource("/res/account.fxml"));
-		AnchorPane page = (AnchorPane) loader.load();
+		FXMLLoader loader = new FXMLLoader();
+		// Main.class.getResource("/res/account.fxml"));
+		// AnchorPane page = (AnchorPane) loader.load();
+
+		Parent root = (Parent) loader.load(getClass().getResource(
+				"/res/account.fxml").openStream());
+
 		Stage dialogStage = new Stage();
 		dialogStage.getIcons().add(new Image("/res/account.png"));
 		dialogStage.setTitle("Edit Account");
-		// dialogStage.initModality(Modality.WINDOW_MODAL);
+		dialogStage.initModality(Modality.NONE);
 		dialogStage.initOwner(primaryStage);
-		Scene scene = new Scene(page);
+
+		Scene scene = new Scene(root);
 		dialogStage.setScene(scene);
 
 		// Set the person into the controller
@@ -276,8 +292,8 @@ public class Controller {
 		dialogStage.show();
 	}
 
-	public String sets() {
-		return maschine.getAllAccount();
+	@FXML
+	void printAll(ActionEvent event) {
+	//	System.out.println(maschine.getAllAccount());
 	}
-
 }

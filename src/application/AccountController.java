@@ -2,14 +2,15 @@ package application;
 
 import java.net.*;
 import java.util.*;
-
+import java.util.concurrent.*;
 import exceptions.*;
 import logic.*;
+import javafx.application.*;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
+import javafx.stage.*;
 
 public class AccountController {
 
@@ -51,9 +52,8 @@ public class AccountController {
 	/*
 	 * Object Account for inserting all the stuff there
 	 */
-	 Account ac = new Account();
-	 CashMachine<Account> maschine = new CashMachine<Account>();
-	 Controller st = new Controller();
+	Account ac = new Account();
+	CashMachine<Account> maschine;
 
 	@FXML
 	void initialize() {
@@ -66,6 +66,8 @@ public class AccountController {
 		assert printButton != null : "fx:id=\"printButton\" was not injected: check your FXML file 'account.fxml'.";
 		assert saveAccount != null : "fx:id=\"saveAccount\" was not injected: check your FXML file 'account.fxml'.";
 		assert saveButton != null : "fx:id=\"saveButton\" was not injected: check your FXML file 'account.fxml'.";
+
+		maschine = new CashMachine<Account>();
 
 	}
 
@@ -108,7 +110,7 @@ public class AccountController {
 			TextArea.appendText("\n" + s.next());
 		}
 		System.out.println(" ");
-		st.sets();
+		maschine.getAllAccount();
 	}
 
 	/**
@@ -121,24 +123,25 @@ public class AccountController {
 		double deposit = ac.getBankDeposit();
 		double overdraft = ac.getOverdraft();
 		int pin = ac.getPin();
-		// st.sets();
 
 		Account saveNewOne = new Account(number, overdraft, deposit, pin);
 		maschine.addNewAccount(saveNewOne);
 		TextArea.appendText("\nYou have saved new account");
 
-		// TimerTask closeIt = new TimerTask() {
-		// @Override
-		// public void run() {
-		// Platform.runLater(new Runnable() {
-		// @Override
-		// public void run() {
-		// dialogStage.close();
-		// }
-		// });
-		// }
-		// };
-		// new Timer().schedule(closeIt, 1500);
+		final ScheduledExecutorService scheduler = Executors
+				.newScheduledThreadPool(1);
 
+		scheduler.scheduleAtFixedRate(new Runnable() {
+			@Override
+			public void run() {
+
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						dialogStage.close();
+					}
+				});
+			}
+		}, 2, 1, TimeUnit.SECONDS);
 	}
 }

@@ -9,7 +9,7 @@ public class CashMachine<K> implements Iterable<Account> {
 		READY, CARD_INSERTED, PIN_CORRECT, PIN_WRONG,
 	}
 
-	List<Account> accounts = new LinkedList<Account>();
+	static LinkedList<Account> accounts;
 	Account ac;
 	CashCard cashCard;
 	State state;
@@ -17,13 +17,14 @@ public class CashMachine<K> implements Iterable<Account> {
 	public CashMachine() {
 		state = State.READY;
 
-		Account a1 = new Account(23456789, -100.0, 2000, 1234);
-		Account a2 = new Account(34567890, -200.0, 3000, 1234);
-		Account a3 = new Account(12345678, 0.0, 50000, 1234);
-		// new predefined accounts
-		accounts.add(a1);
-		accounts.add(a2);
-		accounts.add(a3);
+		// Account a1 = new Account(23456789, -100.0, 2000, 1234);
+		// Account a2 = new Account(34567890, -200.0, 3000, 1234);
+		// Account a3 = new Account(12345678, 0.0, 50000, 1234);
+		//
+		// // new predefined accounts
+		// accounts.add(a1);
+		// accounts.add(a2);
+		// accounts.add(a3);
 	}
 
 	/**
@@ -195,6 +196,7 @@ public class CashMachine<K> implements Iterable<Account> {
 		accounts.add(no);
 		System.out.println("account size : " + accounts.size());
 		System.out.println("\n");
+		System.out.println(getAllAccount());
 	}
 
 	/**
@@ -202,8 +204,12 @@ public class CashMachine<K> implements Iterable<Account> {
 	 * @return all accounts
 	 */
 	public String getAllAccount() {
-		System.out.println(accounts.toString());
-		return null;
+		return "\n" + accounts.toString();
+	}
+
+	public static LinkedList<Account> getone() {
+		accounts = new LinkedList<Account>();
+		return accounts;
 	}
 
 }
