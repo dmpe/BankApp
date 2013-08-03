@@ -138,7 +138,6 @@ public class Controller {
 		choice.setToggleGroup(group);
 
 		infoText.appendText("\nPlease, insert you card in ATM");
-
 		this.accounts = CashMachine.getone();
 	}
 
@@ -192,6 +191,8 @@ public class Controller {
 			infoText.appendText("\nOnly numbers are permitted");
 			accountStatement.setDisable(true);
 			pinField.setEditable(true);
+		} catch (NullPointerException e) {
+			infoText.appendText("\nError! First insert a new account");
 		}
 		event.consume();
 	}
@@ -216,7 +217,7 @@ public class Controller {
 			infoText.deleteText(0, zahl3);
 			maschine.ejectCashCard();
 			moneyField.deleteText(0, zahl4);
-			infoText.appendText("Insert your card number ");
+			infoText.appendText("Insert your card number or create a new account ");
 		} catch (CardNotInsertedException e) {
 			System.out.println(e.getMessage());
 		}
@@ -239,9 +240,9 @@ public class Controller {
 				infoText.appendText("\nYou must choose the ammount to withdraw");
 			}
 		} catch (PinNotCorectException e) {
-			infoText.appendText(e.getMessage());
+			infoText.appendText("\nPin is not correct");
 		} catch (NotEnoughMoneyException e) {
-			infoText.appendText(e.getMessage());
+			infoText.appendText("\nYou don't have enougth money to do so");
 		} catch (NumberFormatException e) {
 			infoText.appendText("\nYou can't do this");
 		}
@@ -270,12 +271,8 @@ public class Controller {
 
 		// Load the fxml file and create a new stage for the popup
 		FXMLLoader loader = new FXMLLoader();
-		// Main.class.getResource("/res/account.fxml"));
-		// AnchorPane page = (AnchorPane) loader.load();
-
 		Parent root = (Parent) loader.load(getClass().getResource(
 				"/res/account.fxml").openStream());
-
 		Stage dialogStage = new Stage();
 		dialogStage.getIcons().add(new Image("/res/account.png"));
 		dialogStage.setTitle("Edit Account");
@@ -294,6 +291,13 @@ public class Controller {
 
 	@FXML
 	void printAll(ActionEvent event) {
-	//	System.out.println(maschine.getAllAccount());
+		if (maschine.size() <= 0) {
+			infoText.appendText("\nYou have saved 0 accounts. Create them first.");
+		} else {
+			Iterator<Account> s = maschine.iterator();
+			while (s.hasNext()) {
+				infoText.appendText("\n" + s.next());
+			}
+		}
 	}
 }

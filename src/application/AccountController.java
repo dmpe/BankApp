@@ -54,6 +54,7 @@ public class AccountController {
 	 */
 	Account ac = new Account();
 	CashMachine<Account> maschine;
+	Controller c = new Controller();
 
 	@FXML
 	void initialize() {
@@ -105,12 +106,14 @@ public class AccountController {
 	@FXML
 	void printAllAccounts(ActionEvent event) {
 		Iterator<Account> s = maschine.iterator();
+		if (maschine.size() <= 0) {
+			TextArea.appendText("You have saved no accounts. First create a new one");
+		}
 		TextArea.appendText("\nUnsaved accounts will NOT be printed");
 		while (s.hasNext()) {
 			TextArea.appendText("\n" + s.next());
 		}
 		System.out.println(" ");
-		maschine.getAllAccount();
 	}
 
 	/**
@@ -127,7 +130,6 @@ public class AccountController {
 		Account saveNewOne = new Account(number, overdraft, deposit, pin);
 		maschine.addNewAccount(saveNewOne);
 		TextArea.appendText("\nYou have saved new account");
-
 		final ScheduledExecutorService scheduler = Executors
 				.newScheduledThreadPool(1);
 

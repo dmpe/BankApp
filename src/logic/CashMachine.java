@@ -14,14 +14,13 @@ public class CashMachine<K> implements Iterable<Account> {
 	CashCard cashCard;
 	State state;
 
+	Account a1 = new Account(23456789, -100.0, 2000, 1234);
+	Account a2 = new Account(34567890, -200.0, 3000, 1234);
+	Account a3 = new Account(12345678, 0.0, 50000, 1234);
+
 	public CashMachine() {
 		state = State.READY;
-
-		// Account a1 = new Account(23456789, -100.0, 2000, 1234);
-		// Account a2 = new Account(34567890, -200.0, 3000, 1234);
-		// Account a3 = new Account(12345678, 0.0, 50000, 1234);
-		//
-		// // new predefined accounts
+		// doesnt work yet
 		// accounts.add(a1);
 		// accounts.add(a2);
 		// accounts.add(a3);
@@ -189,6 +188,7 @@ public class CashMachine<K> implements Iterable<Account> {
 	}
 
 	/**
+	 * http://stackoverflow.com/questions/3717028/access-list-from-another-class
 	 * Gets a new account and saves it in the list Method used by the
 	 * AccountController class
 	 */
@@ -201,15 +201,33 @@ public class CashMachine<K> implements Iterable<Account> {
 
 	/**
 	 * 
-	 * @return all accounts
+	 * @return all accounts (String)
 	 */
 	public String getAllAccount() {
 		return "\n" + accounts.toString();
 	}
 
+	/**
+	 * Static method for getting account from LL
+	 * 
+	 * @return all accounts (LinkedList<Account>)
+	 */
 	public static LinkedList<Account> getone() {
 		accounts = new LinkedList<Account>();
 		return accounts;
 	}
 
+	/**
+	 * 
+	 * @return size
+	 */
+	public int size() {
+		return accounts.size();
+	}
+
+	// public void dej() {
+	// accounts.add(a1);
+	// accounts.add(a2);
+	// accounts.add(a3);
+	// }
 }

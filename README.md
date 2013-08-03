@@ -1,10 +1,9 @@
 # Bank application #
 
-This application **simulates ATM** (which is our GUI) for your bank account. In the app there are already some account predefined, thus you can: 
+This application **simulates ATM** (which is our GUI) for your bank account. **In the app you have to first add some accounts and only then "simulate the whole ATM". Otherwise it wont work.**
 
-1.  **Insert your card number and pin number**. The app will connect to one already predefined accounts and this one will be used until you take your card out. 
-2.  You can withdraw your money (which are already predefined) from the bank account. **You can do so in 2 ways**. Either you choose one of a given amounts of money. Or you can insert your own amount which you want to take out.
-3.  Then app includes a lot of messages, one of them is the **info box**. 
+1.  **Create a new account (under menu file)**. Save it and then you can insert card and doing etc. 
+2.  You can withdraw your money from the bank account. **You can do so in 2 ways**. Either you choose one of a given amounts of money. Or you can insert your own amount which you want to take out.
 
 Application is based on 2 exercises I have done during my 2. semester at the university. All of them are here, [on github](https://github.com/Johnmalc/Homeworks2), and one of them is this [one](https://github.com/Johnmalc/Homeworks2/tree/master/Aufgabe1) and another one is [here](https://github.com/Johnmalc/Homeworks2/tree/master/Aufgabe13). The main logic is taken from [here](https://github.com/Johnmalc/Homeworks2/tree/master/Aufgabe13) (not GUI/Vars/Main.java).
 
@@ -38,9 +37,6 @@ Here [http://www.komentovaneudalosti.cz/blog/?p=1126](http://www.komentovaneudal
 2. [x] TextField should be done with Scrollbar
 
 ----------
-
-- to add some close button > delete menu label and correct the print all accounts button
-- PROBLEM: kdyz zadam neco jineho nez 23456789 tak to sice vypise informace o nem, ale bug > ja chci jiny
 - https://forums.oracle.com/thread/2543153
 - http://code.metager.de/source/xref/netbeans/javafx2.samples/FXML-LoginDemo/src/demo/Main.java
 - http://docs.oracle.com/javafx/2/api/index.html?javafx/stage/Window.html
