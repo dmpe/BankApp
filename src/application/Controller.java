@@ -17,6 +17,8 @@ import jfxtras.labs.dialogs.*;
 import jfxtras.labs.dialogs.MonologFX.*;
 import logic.*;
 
+import org.controlsfx.dialog.*;
+
 public class Controller {
 
 	@FXML
@@ -251,12 +253,10 @@ public class Controller {
 
 	@FXML
 	void About(ActionEvent event) throws IOException {
-		MonologFX mf = new MonologFX(Type.INFO);
-		mf.setMessage("Created by @Malcjohn  - cincenko@outlook.com" + "\n"
+		Dialog s = new Dialog(null, "Dialog test");
+		s.setContent(" Created by @Malcjohn  - cincenko@outlook.com" + "\n"
 				+ "https://github.com/Johnmalc/BankApp/");
-		mf.setTitleText("About this app");
-		mf.centerOnScreen();
-		mf.showDialog();
+		s.show();
 	}
 
 	/**
@@ -271,15 +271,14 @@ public class Controller {
 
 		// Load the fxml file and create a new stage for the popup
 		FXMLLoader loader = new FXMLLoader();
-		Parent root = (Parent) loader.load(getClass().getResource(
-				"/res/account.fxml").openStream());
+		Parent d = (Parent) loader.load(getClass().getResource("/res/account.fxml").openStream());
 		Stage dialogStage = new Stage();
 		dialogStage.getIcons().add(new Image("/res/account.png"));
 		dialogStage.setTitle("Edit Account");
 		dialogStage.initModality(Modality.NONE);
 		dialogStage.initOwner(primaryStage);
 
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(d);
 		dialogStage.setScene(scene);
 
 		// Set the person into the controller
