@@ -10,10 +10,7 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
-import javafx.scene.layout.*;
 import javafx.stage.*;
-import jfxtras.labs.dialogs.*;
-import jfxtras.labs.dialogs.MonologFX.*;
 import logic.*;
 import org.controlsfx.dialog.Dialogs;
 
@@ -268,18 +265,18 @@ public class Controller {
 	 */
 	@FXML
 	void NewAccount(ActionEvent event) throws IOException {
-
-		// Load the fxml file and create a new stage for the popup
-		FXMLLoader loader = new FXMLLoader();
-		Parent d = (Parent) loader.load(getClass().getResource(
-				"/res/account.fxml").openStream());
+//	    Parent root = FXMLLoader.load(getClass().getResource("/res/account.fxml").openStream());
+//		// Load the fxml file and create a new stage for the popup
+//		FXMLLoader loader = new FXMLLoader();
+//		Parent d = (Parent) loader.load(getClass().getResource(
+//				"/res/account.fxml").openStream());
 		Stage dialogStage = new Stage();
 		dialogStage.getIcons().add(new Image("/res/account.png"));
 		dialogStage.setTitle("Edit Account");
 		dialogStage.initModality(Modality.NONE);
 		dialogStage.initOwner(primaryStage);
 
-		Scene scene = new Scene(d);
+		Scene scene = new Scene(root);
 		dialogStage.setScene(scene);
 
 		// Set the person into the controller
