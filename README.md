@@ -25,25 +25,29 @@ Do whatever you need to do, I don't care. I use libraries so must comply with th
 
 2. [JFXtras](https://github.com/JFXtras/jfxtras-labs)
 
+3. [ControlsFX](http://www.controlsfx.org/)
+
 **BLOG**
 
 Look more on my blog where I have wrote about it.
+ 
+-  [http://www.komentovaneudalosti.cz/blog/?p=1126](http://www.komentovaneudalosti.cz/blog/?p=1126)
 
-Here [http://www.komentovaneudalosti.cz/blog/?p=1126](http://www.komentovaneudalosti.cz/blog/?p=1126)
+-  [http://www.komentovaneudalosti.cz/blog/?p=1190](http://www.komentovaneudalosti.cz/blog/?p=1190)
 
 **Features in the future** 
 
-1. [X] Allow to add accounts in the cashmaschine dynamically, through another fxml model. Nice to create some menu **See Problems**
-2. [x] TextField should be done with Scrollbar
+-  [] Rewritten in Java 8 (already started in another branch)
+
 
 ----------
-- https://forums.oracle.com/thread/2543153
-- http://code.metager.de/source/xref/netbeans/javafx2.samples/FXML-LoginDemo/src/demo/Main.java
-- http://docs.oracle.com/javafx/2/api/index.html?javafx/stage/Window.html
-- http://stackoverflow.com/questions/15041760/javafx-open-new-window
-- https://gist.github.com/jewelsea/1887631
-- http://stackoverflow.com/questions/10486731/how-to-create-a-modal-window-in-javafx-2-1
-- http://java-buddy.blogspot.cz/2012/12/open-new-window-in-javafx-2.html
+**Information for myself:**
 
-
-- http://edu.makery.ch/blog/2012/11/27/javafx-tutorial-addressapp-5/
+- [https://forums.oracle.com/thread/2543153](https://forums.oracle.com/thread/2543153)
+- [http://code.metager.de/source/xref/netbeans/javafx2.samples/FXML-LoginDemo/src/demo/Main.java](http://code.metager.de/source/xref/netbeans/javafx2.samples/FXML-LoginDemo/src/demo/Main.java)
+- [http://docs.oracle.com/javafx/2/api/index.html?javafx/stage/Window.html](http://docs.oracle.com/javafx/2/api/index.html?javafx/stage/Window.html)
+- [http://stackoverflow.com/questions/15041760/javafx-open-new-window](http://stackoverflow.com/questions/15041760/javafx-open-new-window)
+- [https://gist.github.com/jewelsea/1887631](https://gist.github.com/jewelsea/1887631)
+- [http://stackoverflow.com/questions/10486731/how-to-create-a-modal-window-in-javafx-2-1](http://stackoverflow.com/questions/10486731/how-to-create-a-modal-window-in-javafx-2-1)
+- [http://java-buddy.blogspot.cz/2012/12/open-new-window-in-javafx-2.html](http://java-buddy.blogspot.cz/2012/12/open-new-window-in-javafx-2.html)
+- [http://edu.makery.ch/blog/2012/11/27/javafx-tutorial-addressapp-5/](http://edu.makery.ch/blog/2012/11/27/javafx-tutorial-addressapp-5/)
