@@ -3,7 +3,6 @@ package application;
 import java.io.*;
 import java.net.*;
 import java.util.*;
-
 import exceptions.*;
 import javafx.collections.*;
 import javafx.event.*;
@@ -16,8 +15,7 @@ import javafx.stage.*;
 import jfxtras.labs.dialogs.*;
 import jfxtras.labs.dialogs.MonologFX.*;
 import logic.*;
-
-import org.controlsfx.dialog.*;
+import org.controlsfx.dialog.Dialogs;
 
 public class Controller {
 
@@ -253,10 +251,12 @@ public class Controller {
 
 	@FXML
 	void About(ActionEvent event) throws IOException {
-		Dialog s = new Dialog(null, "Dialog test");
-		s.setContent(" Created by @Malcjohn  - cincenko@outlook.com" + "\n"
-				+ "https://github.com/Johnmalc/BankApp/");
-		s.show();
+		Dialogs.create()
+				.title("Dialog test")
+				.message(
+						"Created by @Malcjohn  - cincenko@outlook.com" + "\n"
+								+ "https://github.com/Johnmalc/BankApp/")
+				.showInformation();
 	}
 
 	/**
@@ -271,7 +271,8 @@ public class Controller {
 
 		// Load the fxml file and create a new stage for the popup
 		FXMLLoader loader = new FXMLLoader();
-		Parent d = (Parent) loader.load(getClass().getResource("/res/account.fxml").openStream());
+		Parent d = (Parent) loader.load(getClass().getResource(
+				"/res/account.fxml").openStream());
 		Stage dialogStage = new Stage();
 		dialogStage.getIcons().add(new Image("/res/account.png"));
 		dialogStage.setTitle("Edit Account");
