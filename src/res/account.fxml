@@ -9,7 +9,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="372.0" prefWidth="555.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="application.AccountController">
   <children>
-    <TextField id="AccountNumber" fx:id="AccountNumberField" layoutX="129.0" layoutY="75.0" prefWidth="198.0" />
+    <TextField id="AccountNumber" fx:id="AccountNumberField" layoutX="130.0" layoutY="75.0" prefWidth="198.0" />
     <TextField fx:id="OverdraftField" layoutX="129.0" layoutY="109.0" prefWidth="198.0001220703125" />
     <TextField fx:id="CashField" layoutX="129.0" layoutY="153.0" prefWidth="198.0" />
     <Label id="AccountNumber" layoutX="20.0" layoutY="78.0" text="Account Number" underline="false" />

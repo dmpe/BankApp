@@ -55,6 +55,7 @@ public class AccountController {
 	Account ac = new Account();
 	CashMachine<Account> maschine;
 	Controller c = new Controller();
+	Stage con;
 
 	@FXML
 	void initialize() {
@@ -73,7 +74,7 @@ public class AccountController {
 	}
 
 	public void setNewAccount(Stage dialogStage) {
-		this.dialogStage = dialogStage;
+		this.con = dialogStage;
 	}
 
 	@FXML

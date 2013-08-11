@@ -20,9 +20,6 @@ public class Main extends Application {
 		primaryStage.setTitle("Bank Business created by @malcjohn");
 		primaryStage.setScene(frame);
 		primaryStage.centerOnScreen();
-
-		Controller s = loader.getController();
-		s.setMainApp(this);
 		primaryStage.show();
 
 	}

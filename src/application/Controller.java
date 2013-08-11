@@ -253,7 +253,7 @@ public class Controller {
 				.message(
 						"Created by @Malcjohn  - cincenko@outlook.com" + "\n"
 								+ "https://github.com/Johnmalc/BankApp/")
-				.showInformation();
+				.lightweight().showInformation();
 	}
 
 	/**
@@ -261,15 +261,13 @@ public class Controller {
 	 * http://edu.makery.ch/blog/2012/11/27/javafx-tutorial-addressapp-5/
 	 * 
 	 * @param event
-	 * @throws IOException
+	 * @throws Exception
 	 */
 	@FXML
-	void NewAccount(ActionEvent event) throws IOException {
-//	    Parent root = FXMLLoader.load(getClass().getResource("/res/account.fxml").openStream());
-//		// Load the fxml file and create a new stage for the popup
-//		FXMLLoader loader = new FXMLLoader();
-//		Parent d = (Parent) loader.load(getClass().getResource(
-//				"/res/account.fxml").openStream());
+	void NewAccount(ActionEvent event) throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+		Parent root = (Parent) loader.load(getClass().getResource(
+				"/res/account.fxml").openStream());
 		Stage dialogStage = new Stage();
 		dialogStage.getIcons().add(new Image("/res/account.png"));
 		dialogStage.setTitle("Edit Account");
@@ -279,9 +277,8 @@ public class Controller {
 		Scene scene = new Scene(root);
 		dialogStage.setScene(scene);
 
-		// Set the person into the controller
-		AccountController controller = loader.getController();
-		controller.setNewAccount(dialogStage);
+		AccountController ac = loader.getController();
+		ac.setNewAccount(dialogStage);
 
 		dialogStage.show();
 	}

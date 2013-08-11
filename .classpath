@@ -3,12 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="/home/john/Documents/BankApp/jfxtras-labs-2.2-r6.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/home/john/Documents/BankApp/jfxtras-labs-2.2-r6-javadoc.jar!/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="/home/john/Documents/BankApp/javafx-dialogs-0.0.3.jar"/>
 	<classpathentry kind="lib" path="/home/john/Documents/BankApp/controlsfx-8.0.1.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:file:/home/john/Documents/BankApp/controlsfx-8.0.1-javadoc.jar!/"/>
