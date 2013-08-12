@@ -2,10 +2,8 @@ package application;
 
 import java.net.*;
 import java.util.*;
-import java.util.concurrent.*;
 import exceptions.*;
 import logic.*;
-import javafx.application.*;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
@@ -131,20 +129,6 @@ public class AccountController {
 		Account saveNewOne = new Account(number, overdraft, deposit, pin);
 		maschine.addNewAccount(saveNewOne);
 		TextArea.appendText("\nYou have saved new account");
-		final ScheduledExecutorService scheduler = Executors
-				.newScheduledThreadPool(1);
-
-		scheduler.scheduleAtFixedRate(new Runnable() {
-			@Override
-			public void run() {
-
-				Platform.runLater(new Runnable() {
-					@Override
-					public void run() {
-						dialogStage.close();
-					}
-				});
-			}
-		}, 2, 1, TimeUnit.SECONDS);
+		TextArea.appendText("\nYou can the current window now" );
 	}
 }

@@ -12,7 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.stage.*;
 import logic.*;
-import org.controlsfx.dialog.Dialogs;
+import org.controlsfx.dialog.*;
 
 public class Controller {
 
