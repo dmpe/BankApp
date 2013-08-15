@@ -17,7 +17,7 @@ You are *W E L C O M E* to make issues & and your pull requests. I will look on 
 
 **License: MIT** 
 
-Do whatever you need to do, I don't care. I use libraries so must comply with them too.
+Do whatever you need to do, I don't care.
 
 **Libraries used**
 
@@ -35,9 +35,11 @@ Look more on my blog where I have wrote about it.
 
 -  [http://www.komentovaneudalosti.cz/blog/?p=1190](http://www.komentovaneudalosti.cz/blog/?p=1190)
 
-**Features in the future** 
+-  [http://www.komentovaneudalosti.cz/blog/?p=1206](http://www.komentovaneudalosti.cz/blog/?p=1206)
 
--  [] Rewritten in Java 8 (already started in another branch)
+**Features** 
+
+-  [X] Both versions for JavaFX 2.x (master branch) and JavaFX 8 (java8 branch)
 
 
 ----------
