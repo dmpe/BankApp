@@ -29,7 +29,7 @@ Do whatever you need to do, I don't care.
 
 **BLOG**
 
-Look more on my blog where I have wrote about it.
+Look more on my blog where I have wrote about it (no longer working links).
  
 -  [http://www.komentovaneudalosti.cz/blog/?p=1126](http://www.komentovaneudalosti.cz/blog/?p=1126)
 
